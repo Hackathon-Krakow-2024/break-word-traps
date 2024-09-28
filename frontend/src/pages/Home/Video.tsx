@@ -1,4 +1,5 @@
-import { useEffect, useState } from 'react'
+import { useRef, useEffect, useState } from 'react'
+import ReactPlayer from 'react-player'
 
 type Props = {
   videoFile: File | null
@@ -8,6 +9,7 @@ type Props = {
 export const Video = ({ videoFile, subtitles }: Props) => {
   const [videoUrl, setVideoUrl] = useState<string>('')
   const [subtitlesUrl, setSubtitlesUrl] = useState<string>('')
+  const playerRef = useRef<ReactPlayer | null>(null)
 
   useEffect(() => {
     if (videoFile) {
@@ -15,7 +17,9 @@ export const Video = ({ videoFile, subtitles }: Props) => {
       setVideoUrl(url)
 
       return () => {
-        URL.revokeObjectURL(url)
+        if (url) {
+          URL.revokeObjectURL(url)
+        }
       }
     }
   }, [videoFile])
@@ -27,17 +31,37 @@ export const Video = ({ videoFile, subtitles }: Props) => {
       setSubtitlesUrl(url)
 
       return () => {
-        URL.revokeObjectURL(url)
+        if (url) {
+          URL.revokeObjectURL(url)
+        }
       }
     }
   }, [subtitles])
 
   if (!videoUrl) return null
 
+  const handleMoveToVideoTime = (timestamp: number) => {
+    if (playerRef.current) {
+      playerRef.current.seekTo(timestamp, 'seconds')
+    }
+  }
+
   return (
-    <video controls>
-      <source src={videoUrl} type='video/mp4' />
-      <track label='Polski' kind='subtitles' srcLang='pl' src={subtitlesUrl} default />
-    </video>
+    <div>
+      <div>
+        <ReactPlayer
+          ref={playerRef}
+          url={videoUrl}
+          key={subtitlesUrl}
+          controls
+          config={{
+            file: {
+              tracks: [{ kind: 'subtitles', src: subtitlesUrl, srcLang: 'pl', default: true, label: 'video react' }],
+            },
+          }}
+        />
+        <button onClick={() => handleMoveToVideoTime(10)}>Przewiń do 10 sekundy</button>
+      </div>
+    </div>
   )
 }

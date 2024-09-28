@@ -21,16 +21,26 @@ export const Home = () => {
     setVideo(video)
   }
 
-  const handleClick = async () => {
-    try {
-      setIsLoading(true)
-      const result = await getTranscriptAndSubtitles(video as File)
-      setResult(result)
-    } catch (e) {
-      console.log(e)
-    } finally {
-      setIsLoading(false)
+  const handleVerifyVideo = async () => {
+    setIsLoading(true)
+    const result = {
+      transcript:
+        ' Kiedy wybrałeś dostosowany hotel pod wózek, ale nie możesz tam wjechać. Do stołówki masz podjazd, więc też nie możesz tam wjechać, ale jak już wjedziesz to jest duży próg, którego i tak nie pokonasz. A żeby nie było za dobrze, to do pokoju masz kilka schodków, a jak już się tam jakoś dostaniesz, to do pokoju masz próg. Także ja pierdolę.',
+      subtitles:
+        'WEBVTT\n\n00:00.000 --> 00:03.240\nKiedy wybrałeś dostosowany hotel pod wózek, ale nie możesz tam wjechać.\n\n00:03.240 --> 00:07.879\nDo stołówki masz podjazd, więc też nie możesz tam wjechać, ale jak już wjedziesz to jest duży próg, którego i tak nie pokonasz.\n\n00:07.879 --> 00:12.539\nA żeby nie było za dobrze, to do pokoju masz kilka schodków, a jak już się tam jakoś dostaniesz, to do pokoju masz próg.\n\n00:12.539 --> 00:13.820\nTakże ja pierdolę.',
     }
+    setResult(result)
+    setIsLoading(false)
+
+    // try {
+    //   setIsLoading(true)
+    //   const result = await getTranscriptAndSubtitles(video as File)
+    //   setResult(result)
+    // } catch (e) {
+    //   console.log(e)
+    // } finally {
+    //   setIsLoading(false)
+    // }
   }
 
   const handleClick2 = async () => {
@@ -47,14 +57,14 @@ export const Home = () => {
   }
 
   return (
-    <Container className='mx-auto my-10 flex h-screen w-5/6 overflow-y-scroll bg-slate-400 p-20'>
-      <Container className='flex h-fit flex-col items-center justify-center gap-1 pt-0'>
+    <Container className='mx-auto my-10 flex h-screen w-5/6 overflow-y-scroll bg-slate-400 p-2'>
+      <Container className='flex h-fit flex-col items-center justify-center gap-1 pl-0'>
         <Container className='flex flex-col items-start gap-2'>
           <label className='mb-2 block text-sm font-medium text-gray-900 dark:text-white' htmlFor='video'>
             Upload Video
           </label>
           <input
-            className='block w-full cursor-pointer rounded-lg border border-gray-300 bg-gray-50 text-sm text-gray-900 focus:outline-none dark:border-gray-600 dark:bg-gray-700 dark:text-gray-400 dark:placeholder-gray-400'
+            // className='block w-full cursor-pointer rounded-lg border border-gray-300 bg-gray-50 text-sm text-gray-900 focus:outline-none dark:border-gray-600 dark:bg-gray-700 dark:text-gray-400 dark:placeholder-gray-400'
             id='video'
             type='file'
             onChange={handleUploadVideo}
@@ -62,7 +72,7 @@ export const Home = () => {
           />
           <Video videoFile={video} subtitles={result.subtitles} />
           <button
-            onClick={handleClick}
+            onClick={handleVerifyVideo}
             disabled={isButtonDisabled}
             className='mb-2 me-2 w-fit rounded-lg bg-blue-700 px-5 py-2.5 text-sm font-medium text-white hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 disabled:bg-slate-600 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800'
           >
