@@ -4,7 +4,7 @@ export const Header = () => {
       <div className='container mx-auto flex items-center justify-between px-6 py-4'>
         <div className='text-2xl font-bold'>
           <a href='/' className='hover:text-gray-300'>
-            Break Word Traps
+            Words Smoothie
           </a>
         </div>
         <nav>

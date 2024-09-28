@@ -1,22 +1,35 @@
+import { Box, Typography } from '@mui/material'
 import React from 'react'
+import { useDropzone } from 'react-dropzone'
 
 type VideoUploadProps = {
-  handleUploadVideo: (event: React.ChangeEvent<HTMLInputElement>) => void
+  handleUploadVideo: (event: any) => void
 }
 
 const VideoUpload: React.FC<VideoUploadProps> = ({ handleUploadVideo }) => {
+  const { getRootProps, getInputProps, isDragActive } = useDropzone({
+    accept: {
+      'video/*': ['.mp4'],
+    },
+    onDrop: handleUploadVideo,
+  })
+
   return (
-    <div>
-      <label className='mb-2 block text-sm font-medium text-gray-900 dark:text-white' htmlFor='video'>
-        Upload Video
-      </label>
-      <input
-        className='block w-full cursor-pointer rounded-lg border border-gray-300 bg-gray-50 text-sm text-gray-900 focus:outline-none dark:border-gray-600 dark:bg-gray-700 dark:text-gray-400 dark:placeholder-gray-400'
-        id='video'
-        type='file'
-        onChange={handleUploadVideo}
-        accept='.mp4'
-      />
+    <div className='flex flex-col bg-gray-100'>
+      <Box
+        {...getRootProps()}
+        className={`w-full max-w-md cursor-pointer rounded-lg border-2 border-dashed p-6 ${isDragActive ? 'border-blue-500 bg-blue-50' : 'border-gray-300 bg-white'} `}
+      >
+        <input {...getInputProps()} />
+
+        <Typography variant='h6' className='mb-2 text-center'>
+          {isDragActive ? 'Drop the video here...' : 'Drag & drop a video file here, or click to select one'}
+        </Typography>
+
+        <Typography variant='body2' className='text-center text-gray-500'>
+          (Only *.mp4 format accepted)
+        </Typography>
+      </Box>
     </div>
   )
 }
