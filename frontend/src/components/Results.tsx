@@ -9,7 +9,7 @@ type Sentiment = {
   hateSpeech: boolean // informacja o mowie nienawiści
 }
 
-type TranscriptionAnalysis = {
+export type TranscriptionAnalysis = {
   fog_message: string // komunikat o zrozumiałości
   fog_score: number // wynik zrozumiałości
   sentiment: Sentiment // obiekt analizy sentymentu

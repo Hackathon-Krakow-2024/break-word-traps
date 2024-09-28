@@ -6,7 +6,7 @@ import { TranscriptionResponse } from '../../models/Transcription'
 import { Video } from './Video'
 import VideoUpload from '../../components/VideoUpload'
 import VideoActions from '../../components/VideoActions'
-import Results from '../../components/Results'
+import Results, { TranscriptionAnalysis } from '../../components/Results'
 import LoadingIndicator from '../../components/LoadingIndicator'
 
 export const Home = () => {
@@ -14,7 +14,26 @@ export const Home = () => {
     text: '',
     subtitles: '',
   })
-  const [transcriptionAnalysis, setTranscriptionAnalysis] = useState<TranscriptionAnalysisType | null>(null)
+  const [transcriptionAnalysis, setTranscriptionAnalysis] = useState<TranscriptionAnalysis>({
+    fog_message: '',
+    fog_score: 0,
+    sentiment: {
+      emotions: {
+        kind: '',
+        score: 0,
+      },
+      hateSpeech: false,
+    },
+    targetGroup: '',
+    grammarScore: 0,
+    tooManyNumbers: false,
+    hasJargon: false,
+    hasForeignLanguage: false,
+    hasNonExistentWords: false,
+    isPassive: false,
+    tooManyRepetitions: false,
+    hasTopicChange: false,
+  })
 
   const [isLoading, setIsLoading] = useState<boolean>(false)
 
