@@ -1,4 +1,4 @@
 export type TranscriptionResponse = {
-  text: string
+  transcript: string
   subtitles: string
 }

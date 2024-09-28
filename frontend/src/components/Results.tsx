@@ -30,7 +30,7 @@ type TranscriptionProps = {
 }
 
 const Results = ({ transcription, transcriptionAnalysis }: TranscriptionProps) => {
-  if (!transcription || !transcription.text) return null
+  if (!transcription || !transcription.transcript) return null
 
   console.log(transcriptionAnalysis)
 
@@ -38,7 +38,7 @@ const Results = ({ transcription, transcriptionAnalysis }: TranscriptionProps) =
     <Container className='flex flex-col items-start gap-2'>
       <div className='flex flex-col items-center'>
         <h2 className='mb-2 text-lg font-medium'>Result</h2>
-        <p className='text-sm text-gray-900 dark:text-white'>{transcription.text}</p>
+        <p className='text-sm text-gray-900 dark:text-white'>{transcription.transcript}</p>
       </div>
     </Container>
   )

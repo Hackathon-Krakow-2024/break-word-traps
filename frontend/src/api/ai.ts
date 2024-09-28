@@ -17,7 +17,7 @@ export const getTranscriptAndSubtitles = async (videoFile: File): Promise<Transc
     return data
   } catch (e) {
     console.log(e)
-    return { text: '', subtitles: '' }
+    return { transcript: '', subtitles: '' }
   }
 }
 
