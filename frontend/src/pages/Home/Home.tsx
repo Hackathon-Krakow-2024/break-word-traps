@@ -1,13 +1,5 @@
 import { Container, Typography } from '@mui/material'
-import { ChangeEvent, useEffect, useState } from 'react'
-import { Todo } from '../../models/Todo'
-
-import { GetAllTodosSection } from './GetAllTodosSection'
-import { DeleteTodoSection } from './DeleteTodoSection'
-import { AddTodoSection } from './AddTodoSection'
-import { GetTodoByIdSection } from './GetTodoByIdSection'
-import { TodoCard } from './TodoCard'
-import { getAllTodos } from '../../api/todos'
+import { ChangeEvent, useState } from 'react'
 import { predict } from '../../api/ai'
 import { Video } from './Video'
 import { TranscriptionResponse } from '../../models/Transcription'
@@ -19,18 +11,7 @@ export const Home = () => {
     subtitles: '',
   })
   const [isLoading, setIsLoading] = useState<boolean>(false)
-  const [todos, setTodos] = useState<Todo[]>([])
-
   const isButtonDisabled = !video
-
-  useEffect(() => {
-    const fetchTodos = async () => {
-      const data = await getAllTodos()
-      setTodos(data)
-    }
-
-    fetchTodos()
-  }, [])
 
   const handleUploadVideo = (e: ChangeEvent<HTMLInputElement>) => {
     const video = e.target.files?.[0]
@@ -51,16 +32,12 @@ export const Home = () => {
   }
 
   return (
-    <Container className='mx-auto my-10 flex h-screen w-5/6 overflow-y-scroll bg-slate-400 p-2'>
+    <Container className='flex h-screen bg-slate-400 p-2'>
       <Container className='flex h-fit flex-col items-center justify-center gap-1 pl-0'>
         <Typography variant='h1' component='h1'>
-          TODO APP
+          {/* Break Words Trap */}
         </Typography>
         <Container className='flex flex-col items-start gap-2'>
-          <GetAllTodosSection setTodos={setTodos} />
-          <GetTodoByIdSection setTodos={setTodos} />
-          <AddTodoSection setTodos={setTodos} />
-          <DeleteTodoSection setTodos={setTodos} />
           <label className='mb-2 block text-sm font-medium text-gray-900 dark:text-white' htmlFor='video'>
             Upload Video
           </label>
@@ -90,15 +67,6 @@ export const Home = () => {
                 </>
               ) : null}
             </div>
-          )}
-        </Container>
-        <Container className='my-2 flex flex-col gap-2'>
-          {todos?.length > 0 ? (
-            todos.map((todo, index) => (
-              <TodoCard key={todo?.id ?? index} todo={todo} todos={todos} setTodos={setTodos} />
-            ))
-          ) : (
-            <Typography>No todos</Typography>
           )}
         </Container>
       </Container>
