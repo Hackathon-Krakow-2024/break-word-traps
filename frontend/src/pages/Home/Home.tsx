@@ -21,8 +21,7 @@ export const Home = () => {
     setVideo(video)
   }
 
-<<<<<<< HEAD
-  const handleClick = async () => {
+  const handleVerifyVideo = async () => {
     try {
       setIsLoading(true)
       const result = await getTranscriptAndSubtitles(video as File)
@@ -44,14 +43,6 @@ export const Home = () => {
       console.log(e)
     } finally {
       setIsLoading(false)
-=======
-  const handleVerifyVideo = () => {
-    const result = {
-      transcript:
-        ' Kiedy wybrałeś dostosowany hotel pod wózek, ale nie możesz tam wjechać. Do stołówki masz podjazd, więc też nie możesz tam wjechać, ale jak już wjedziesz to jest duży próg, którego i tak nie pokonasz. A żeby nie było za dobrze, to do pokoju masz kilka schodków, a jak już się tam jakoś dostaniesz, to do pokoju masz próg. Także ja pierdolę.',
-      subtitles:
-        'WEBVTT\n\n00:00.000 --> 00:03.240\nKiedy wybrałeś dostosowany hotel pod wózek, ale nie możesz tam wjechać.\n\n00:03.240 --> 00:07.879\nDo stołówki masz podjazd, więc też nie możesz tam wjechać, ale jak już wjedziesz to jest duży próg, którego i tak nie pokonasz.\n\n00:07.879 --> 00:12.539\nA żeby nie było za dobrze, to do pokoju masz kilka schodków, a jak już się tam jakoś dostaniesz, to do pokoju masz próg.\n\n00:12.539 --> 00:13.820\nTakże ja pierdolę.',
->>>>>>> 7dedf8a (ov test video)
     }
   }
 
@@ -75,7 +66,6 @@ export const Home = () => {
             disabled={isButtonDisabled}
             className='mb-2 me-2 w-fit rounded-lg bg-blue-700 px-5 py-2.5 text-sm font-medium text-white hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 disabled:bg-slate-600 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800'
           >
-<<<<<<< HEAD
             Transcribe
           </button>
           <button
@@ -83,9 +73,6 @@ export const Home = () => {
             className='mb-2 me-2 w-fit rounded-lg bg-blue-700 px-5 py-2.5 text-sm font-medium text-white hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 disabled:bg-slate-600 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800'
           >
             Analyze
-=======
-            Verify video
->>>>>>> 7dedf8a (ov test video)
           </button>
           {isLoading ? (
             <div>Loading...</div>
