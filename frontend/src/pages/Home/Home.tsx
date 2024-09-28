@@ -17,19 +17,12 @@ export const Home = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false)
 
   const onDrop = (acceptedFiles: File[]) => {
-    console.log(acceptedFiles)
     const videoFile = acceptedFiles[0]
     setVideo(videoFile)
   }
 
   const [video, setVideo] = useState<File | null>(null)
   const isButtonDisabled = !video
-
-  // const handleUploadVideo = (e: ChangeEvent<HTMLInputElement>) => {
-  //   const video = e.target.files?.[0]
-  //   if (!video) return
-  //   setVideo(video)
-  // }
 
   const handleVerifyVideo = async () => {
     setIsLoading(true)
@@ -67,7 +60,7 @@ export const Home = () => {
   }
 
   return (
-    <Container className='mx-auto my-10 flex h-screen w-5/6 overflow-y-scroll bg-slate-400 p-2'>
+    <Container className='mx-auto my-10 flex w-5/6 bg-slate-400 p-2'>
       <Container className='flex h-fit flex-col items-center justify-center gap-1 pl-0'>
         <VideoUpload handleUploadVideo={onDrop} />
         <Video videoFile={video} subtitles={result.subtitles} />
