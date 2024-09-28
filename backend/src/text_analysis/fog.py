@@ -16,6 +16,6 @@ def fog(text: str) -> dict:
   fog_score = textstat.gunning_fog(text)
   message = get_message_based_on_fog_score_simplified(fog_score)
   return {
-    "message": message,
+    "fog_message": message,
     "fog_score": fog_score
   }
