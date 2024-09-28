@@ -6,8 +6,8 @@ import { Contact } from './pages/Contact/Contact'
 function App() {
   return (
     <BrowserRouter>
-      <div>
-        <Header />
+      <Header />
+      <div className='overflow-y-auto'>
         <Routes>
           <Route path='/' element={<Home />} />
           <Route path='/contact' element={<Contact />} />
