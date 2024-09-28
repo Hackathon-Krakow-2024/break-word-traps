@@ -6,7 +6,7 @@ type VideoUploadProps = {
   handleUploadVideo: any
 }
 
-const VideoUpload: React.FC<VideoUploadProps> = ({ handleUploadVideo }) => {
+const VideoUpload = ({ handleUploadVideo }: VideoUploadProps) => {
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     accept: {
       'video/*': ['.mp4'],
