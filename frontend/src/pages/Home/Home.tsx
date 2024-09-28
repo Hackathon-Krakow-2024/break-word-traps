@@ -76,6 +76,17 @@ export const Home = () => {
       hasTopicChange: false,
     })
 
+    try {
+      setIsLoading(true)
+      await analyzeText(
+        'W budżecie na 2025 rok przeznaczymy ponad 221,7 mld zł na ochronę zdrowia. Wzrost nakładów o 31,7 mld zł (6,1%). 0,5 mld zł na program INVITRO, 0,8 mld zł na świadczenia aktywnych rodziców, 0,62 i 0,8 mld zł na program rodzina 800+.'
+      )
+    } catch (e) {
+      console.log(e)
+    } finally {
+      setIsLoading(false)
+    }
+
     // try {
     //   setIsLoading(true)
     //   const result = await getTranscriptAndSubtitles(video as File)
@@ -87,29 +98,12 @@ export const Home = () => {
     // }
   }
 
-  const handleClick2 = async () => {
-    try {
-      setIsLoading(true)
-      await analyzeText(
-        'W budżecie na 2025 rok przeznaczymy ponad 221,7 mld zł na ochronę zdrowia. Wzrost nakładów o 31,7 mld zł (6,1%). 0,5 mld zł na program INVITRO, 0,8 mld zł na świadczenia aktywnych rodziców, 0,62 i 0,8 mld zł na program rodzina 800+.'
-      )
-    } catch (e) {
-      console.log(e)
-    } finally {
-      setIsLoading(false)
-    }
-  }
-
   return (
-    <Container className='mx-auto my-10 flex w-5/6 bg-slate-400 p-2'>
-      <Container className='flex h-fit flex-col items-center justify-center gap-1 pl-0'>
+    <Container className='mx-auto my-10 flex w-5/6 bg-zinc-100 pt-8'>
+      <Container className='flex h-fit flex-col items-center justify-center gap-4 pl-0'>
         <VideoUpload handleUploadVideo={onDrop} />
         <Video videoFile={video} subtitles={transcription.subtitles} />
-        <VideoActions
-          handleVerifyVideo={handleVerifyVideo}
-          handleClick2={handleClick2}
-          isButtonDisabled={isButtonDisabled}
-        />
+        <VideoActions handleVerifyVideo={handleVerifyVideo} isButtonDisabled={isButtonDisabled} />
         {isLoading ? (
           <LoadingIndicator />
         ) : (
