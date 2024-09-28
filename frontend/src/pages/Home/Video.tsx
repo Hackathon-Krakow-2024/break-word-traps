@@ -9,11 +9,7 @@ type Props = {
 export const Video = ({ videoFile, subtitles }: Props) => {
   const [videoUrl, setVideoUrl] = useState<string>('')
   const [subtitlesUrl, setSubtitlesUrl] = useState<string>('')
-
-  // Typujemy playerRef zgodnie z typami z react-player
-  // const playerRef = useRef<ReactPlayer | null>(null)
-  // @ts-expect-error
-  const playerRef = useRef<any>(null)
+  const playerRef = useRef<ReactPlayer | null>(null)
 
   useEffect(() => {
     if (videoFile) {
@@ -45,7 +41,6 @@ export const Video = ({ videoFile, subtitles }: Props) => {
   if (!videoUrl) return null
 
   const handleMoveToVideoTime = (timestamp: number) => {
-    console.log(videoUrl, 'vu', subtitlesUrl, 'su')
     if (playerRef.current) {
       playerRef.current.seekTo(timestamp, 'seconds')
     }
@@ -54,34 +49,17 @@ export const Video = ({ videoFile, subtitles }: Props) => {
   return (
     <div>
       <div>
-        {/* <video controls> 
-          - <source src={videoUrl} type='video/mp4' />
-          - <track label='Polski' kind='subtitles' srcLang='pl' src={subtitlesUrl} default />-{' '}
-        </video> */}
-        {subtitles && (
-          <ReactPlayer
-            ref={playerRef}
-            url={videoUrl}
-            controls
-            config={{
-              file: {
-                tracks: [{ kind: 'subtitles', src: subtitlesUrl, srcLang: 'pl', default: true }],
-              },
-            }}
-          />
-        )}
-        {!subtitles && (
-          <ReactPlayer
-            ref={playerRef}
-            url={videoUrl}
-            controls
-            config={{
-              file: {
-                tracks: [{ kind: 'subtitles', src: subtitlesUrl, srcLang: 'pl', default: true }],
-              },
-            }}
-          />
-        )}
+        <ReactPlayer
+          ref={playerRef}
+          url={videoUrl}
+          key={subtitlesUrl}
+          controls
+          config={{
+            file: {
+              tracks: [{ kind: 'subtitles', src: subtitlesUrl, srcLang: 'pl', default: true, label: 'video react' }],
+            },
+          }}
+        />
         <button onClick={() => handleMoveToVideoTime(10)}>Przewiń do 10 sekundy</button>
       </div>
     </div>
