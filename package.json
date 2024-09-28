@@ -1,0 +1,33 @@
+{
+  "name": "break-word-traps",
+  "description": "HackYeah 2024 Task",
+  "version": "1.0.0",
+  "author": "Krzysztof Kowalczyk <kowalczykkrzysztof893@gmail.com> (https://github.com/kowalczyk-krzysztof)",
+  "license": "MIT",
+  "scripts": {
+    "dev:backend": "cd backend && cross-env PYTHONPATH=src pm2 start uvicorn --interpreter python --name dev-backend -- src.main:app --host 0.0.0.0 --port 7860 --reload",
+    "dev:frontend": "cross-env VITE_API_BASE_URL=http://localhost:7860 pm2 start cmd --name frontend --cwd ./frontend -- /c npm run dev",
+    "dev:stop": "pm2 stop all && pm2 delete all",
+    "dev:list": "pm2 list",
+    "dev:logs": "pm2 logs",
+    "dev": "concurrently \"npm run dev:backend\" \"npm run dev:frontend\"",
+    "build:frontend": "cd frontend && npm install && npm run build",
+    "build:backend": "cd backend && pip install -r requirements.txt",
+    "build": "npm run build:backend && npm run build:frontend",
+    "start:frontend": "npm run build:frontend && cd frontend && npm run preview",
+    "start:backend": "npm run build:backend && cd backend && cross-env PYTHONPATH=src uvicorn src.main:app --host 0.0.0.0 --port 7860",
+    "start": "concurrently \"npm run start:backend\" \"npm run start:frontend\""
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "concurrently": "^9.0.1"
+  },
+  "devDependencies": {
+    "cross-env": "^7.0.3",
+    "pm2": "^5.4.2",
+    "prettier": "^3.3.3",
+    "prettier-plugin-tailwindcss": "^0.6.6"
+  }
+}

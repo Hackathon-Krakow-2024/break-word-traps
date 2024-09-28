@@ -1,0 +1,17 @@
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    environment:
+      - ENVIRONMENT=production
+    ports:
+      - '7860:7860'
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    environment:
+      - ENVIRONMENT=production
+    ports:
+      - '8080:8080'

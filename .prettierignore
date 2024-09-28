@@ -1,0 +1,26 @@
+# Ignore artifacts:
+build
+coverage
+dep
+dist
+certs
+data
+.yarn
+.github
+node_modules
+
+# Ignore all HTML files:
+**/*.html
+
+# Ignore misc
+**/*.md
+*.md
+**/*.yml
+*.yml
+**/*.yaml
+*.yaml
+
+**/*.py
+**/*.txt
+
+**/*.package-lock.json

@@ -1,0 +1,23 @@
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: DEV.Dockerfile
+    volumes:
+      - ./backend:/app
+    environment:
+      - ENVIRONMENT=development
+    ports:
+      - '7860:7860'
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: DEV.Dockerfile
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    environment:
+      - ENVIRONMENT=development
+      - VITE_API_BASE_URL=http://localhost:7860
+    ports:
+      - '8080:8080'
