@@ -1,6 +1,6 @@
 [Polish :poland:](./README.md)
 
-# BreakWordTraps
+# WordsSmoothie
 
 ##### Table of contents
 
