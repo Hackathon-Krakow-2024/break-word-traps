@@ -40,11 +40,11 @@ export const Video = ({ videoFile, subtitles }: Props) => {
 
   if (!videoUrl) return null
 
-  const handleMoveToVideoTime = (timestamp: number) => {
-    if (playerRef.current) {
-      playerRef.current.seekTo(timestamp, 'seconds')
-    }
-  }
+  // const handleMoveToVideoTime = (timestamp: number) => {
+  //   if (playerRef.current) {
+  //     playerRef.current.seekTo(timestamp, 'seconds')
+  //   }
+  // }
 
   return (
     <div>

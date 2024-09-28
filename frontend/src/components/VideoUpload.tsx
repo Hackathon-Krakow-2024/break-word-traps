@@ -1,9 +1,9 @@
 import { Box, Typography } from '@mui/material'
-import React from 'react'
 import { useDropzone } from 'react-dropzone'
 
 type VideoUploadProps = {
-  handleUploadVideo: (event: any) => void
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  handleUploadVideo: any
 }
 
 const VideoUpload: React.FC<VideoUploadProps> = ({ handleUploadVideo }) => {

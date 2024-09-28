@@ -1,12 +1,10 @@
-import React from 'react'
-
 type VideoActionsProps = {
   handleVerifyVideo: () => void
   handleClick2: () => void
   isButtonDisabled: boolean
 }
 
-const VideoActions: React.FC<VideoActionsProps> = ({ handleVerifyVideo, handleClick2, isButtonDisabled }) => {
+const VideoActions = ({ handleVerifyVideo, handleClick2, isButtonDisabled }: VideoActionsProps) => {
   return (
     <div className='mb-5 mt-5 flex flex-col gap-2 md:flex-row md:items-center'>
       <button

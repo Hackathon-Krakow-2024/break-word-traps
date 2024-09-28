@@ -1,4 +1,3 @@
-import React from 'react'
 import { TranscriptionResponse } from '../models/Transcription'
 import { Container } from '@mui/material'
 
@@ -6,7 +5,7 @@ type ResultsProps = {
   result: TranscriptionResponse
 }
 
-const Results: React.FC<ResultsProps> = ({ result }) => {
+const Results = ({ result }: ResultsProps) => {
   if (!result || !result.transcript) return null
 
   return (

@@ -1,6 +1,4 @@
-import React from 'react'
-
-const LoadingIndicator: React.FC = () => {
+const LoadingIndicator = () => {
   return <div>Loading...</div>
 }
 
