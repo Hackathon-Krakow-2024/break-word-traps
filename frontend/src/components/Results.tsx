@@ -1,5 +1,6 @@
 import { TranscriptionResponse } from '../models/Transcription'
 import { Container } from '@mui/material'
+import { ErrorList } from '../components/ErrorList'
 
 type Sentiment = {
   emotions: {
@@ -37,8 +38,9 @@ const Results = ({ transcription, transcriptionAnalysis }: TranscriptionProps) =
   return (
     <Container className='flex flex-col items-start gap-2'>
       <div className='flex flex-col items-center'>
-        <h2 className='mb-2 text-lg font-medium'>Result</h2>
+        <h2 className='mb-2 text-lg font-medium'>Wyniki analizy</h2>
         <p className='text-sm text-gray-900 dark:text-white'>{transcription.transcript}</p>
+        <ErrorList transcriptionAnalysis={transcriptionAnalysis} />
       </div>
     </Container>
   )
