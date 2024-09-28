@@ -8,21 +8,37 @@ model_name = "gpt-3.5-turbo"
 def prompt_ai(text: str):
   api_key = os.getenv("OPENAI_API_KEY")
   client = OpenAI(api_key=api_key)
-  text = "W budżecie na 2025 rok przeznaczymy ponad 221,7 mld zł na ochronę zdrowia. Wzrost nakładów o 31,7 mld zł (6,1%). 0,5 mld zł na program INVITRO, 0,8 mld zł na świadczenia aktywnych rodziców, 0,62 i 0,8 mld zł na program rodzina 800+."
   prompt = f"""
   Tekst={text}
   Dokonaj analizy w następujących kategoriach:
   Sentyment: emocje, ton, mowa nienawiści.
+  Czy zawiera za dużo liczb - powyżej 10% całego tekstu?
+  Czy zawiera za dużo powtórzeń - powyżej 10% całego tekstu?
+  Czy zawiera żargon?
+  Czy jest użyty język inny niż polski?
+  Czy zawiera nieistniejące słowa?
+  Czy jest w formie pasywnej?
+  Czy zmienia się zbyt często temat?
   Grupa docelowa: wiek, wykształcenie.
   Ocena gramatyczna: wstęp, rozwinięcie, zakończenie.
-  Zwróć output w jako JSON string w następującej strukturze:
+  Zwróć output jako JSON string w następującej strukturze:
   {{
   "sentiment": {{
     "emotions": {{
       "kind": "string"
+      "score": "float" // 1 to ekstreamlnie negatywny, 10 to ekstremalnie pozytywny
     }}
+    "hateSpeech": "boolean"
   }},
   "targetGroup": "string"
+  "grammarScore: "float" // 1-10
+  "tooManyNumbers": "boolean",
+  "hasJargon": "boolean",
+  "hasForeignLanguage": "boolean",
+  "hasNonExistentWords": "boolean",
+  "isPassive": "boolean",
+  "tooManyRepetitions": "boolean",
+  "hasTopicChange": "boolean"
   }}
 """
 
