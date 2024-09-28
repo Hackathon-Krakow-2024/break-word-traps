@@ -17,6 +17,8 @@
 3. [**Tools used in this project**](#tools)
    - [**Frontend (GUI layer)**](#frontend-tools)
    - [**Backend (Server layer)**](#backend-tools)
+   - [**AI**](#ai-tools)
+4. [**Architecture**](#architecture)
 
 </hr>
 
@@ -169,3 +171,15 @@ The `backend` layer (the server layer) of the application was built using `Pytho
 The framework used to build this layer is [**FastAPI**](https://fastapi.tiangolo.com/).
 
 The list of all libraries used in this layer is available in [**requirements.txt**](./backend/requirements.txt).
+
+### AI tools
+The application uses two models:
+- OpenAI Whisper,
+- OpenAI gpt-3.5-turbo
+
+</hr>
+
+## Architecture
+![diagram](https://github.com/user-attachments/assets/81fe4668-0eed-48bf-bee9-eea3aadc6fc6)
+
+The application allows the user to upload a video file from disk and analyze it. The first step required for analysis is to extract the audio track from the video. Then an audio transcription is generated using the AI model `Whisper` (medium version) by `OpenAI`. The model is stored locally, on our server. The next step is to analyze the text using the AI model `gpt-3.5-turbo` using `API OpenAI`. The analysis results are presented visually to the user.
