@@ -7,6 +7,7 @@ RUN useradd -m -u 1000 user
 USER user
 ENV PATH="/home/user/.local/bin:$PATH"
 ENV PYTHONPATH="/app/src"
+ARG OPENAI_API_KEY
 
 WORKDIR /app
 

@@ -2,7 +2,7 @@ import { TranscriptionResponse } from '../models/Transcription'
 
 const API = import.meta.env.VITE_API_BASE_URL || 'http://localhost:7860'
 
-export const predict = async (videoFile: File): Promise<TranscriptionResponse> => {
+export const getTranscriptAndSubtitles = async (videoFile: File): Promise<TranscriptionResponse> => {
   try {
     const formData = new FormData()
 
@@ -17,5 +17,23 @@ export const predict = async (videoFile: File): Promise<TranscriptionResponse> =
   } catch (e) {
     console.log(e)
     return { transcript: '', subtitles: '' }
+  }
+}
+
+export const analyzeText = async (transcription: string): Promise<unknown> => {
+  try {
+    const response = await fetch(`${API}/analyze`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ transcription }),
+    })
+    const data = await response.json()
+
+    return data
+  } catch (e) {
+    console.log(e)
+    return {}
   }
 }

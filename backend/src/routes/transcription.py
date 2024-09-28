@@ -1,4 +1,4 @@
-from ai.transcription import generate_transcript_from_video
+from transcription.transcription import generate_transcript_from_video
 from fastapi import HTTPException
 
 async def get_transcript_and_subtitles(video_file_path: str):

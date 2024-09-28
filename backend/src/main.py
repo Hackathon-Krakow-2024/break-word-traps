@@ -18,5 +18,5 @@ async def transcription(video_file: UploadFile = File(...)):
     return await get_transcript_and_subtitles(video_file)
 
 @app.post("/analyze")
-async def analyze(transcription: str):
-    return await analyze_text(transcription)
+async def analyze(request: dict):
+    return await analyze_text(request["transcription"])
