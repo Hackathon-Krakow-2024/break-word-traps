@@ -8,32 +8,14 @@ import VideoUpload from '../../components/VideoUpload'
 import VideoActions from '../../components/VideoActions'
 import Results, { TranscriptionAnalysis } from '../../components/Results'
 import LoadingIndicator from '../../components/LoadingIndicator'
+import { ErrorList } from '../../components/ErrorList'
 
 export const Home = () => {
   const [transcription, setTranscription] = useState<TranscriptionResponse>({
     text: '',
     subtitles: '',
   })
-  const [transcriptionAnalysis, setTranscriptionAnalysis] = useState<TranscriptionAnalysis>({
-    fog_message: '',
-    fog_score: 0,
-    sentiment: {
-      emotions: {
-        kind: '',
-        score: 0,
-      },
-      hateSpeech: false,
-    },
-    targetGroup: '',
-    grammarScore: 0,
-    tooManyNumbers: false,
-    hasJargon: false,
-    hasForeignLanguage: false,
-    hasNonExistentWords: false,
-    isPassive: false,
-    tooManyRepetitions: false,
-    hasTopicChange: false,
-  })
+  const [transcriptionAnalysis, setTranscriptionAnalysis] = useState<TranscriptionAnalysis | null>(null)
 
   const [isLoading, setIsLoading] = useState<boolean>(false)
 
@@ -112,11 +94,11 @@ export const Home = () => {
         <VideoUpload handleUploadVideo={onDrop} />
         <Video videoFile={video} subtitles={transcription.subtitles} />
         <VideoActions handleVerifyVideo={handleVerifyVideo} isButtonDisabled={isButtonDisabled} />
-        {isLoading ? (
-          <LoadingIndicator />
-        ) : (
+        {isLoading && <LoadingIndicator />}
+        {transcriptionAnalysis && (
           <Results transcription={transcription} transcriptionAnalysis={transcriptionAnalysis} />
         )}
+        {transcriptionAnalysis && <ErrorList transcriptionAnalysis={transcriptionAnalysis} />}
       </Container>
     </Container>
   )

@@ -8,7 +8,7 @@ type VideoActionsProps = {
 const VideoActions = ({ handleVerifyVideo, isButtonDisabled }: VideoActionsProps) => {
   return (
     <div className='mb-5 mt-5 flex flex-col gap-2 md:flex-row md:items-center'>
-      <Button onClick={handleVerifyVideo} disabled={isButtonDisabled} variant='outlined'>
+      <Button onClick={handleVerifyVideo} disabled={isButtonDisabled} variant='contained'>
         Analizuj nagranie
       </Button>
     </div>
