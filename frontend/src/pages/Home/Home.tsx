@@ -60,8 +60,8 @@ export const Home = () => {
   }
 
   return (
-    <Container className='mx-auto my-10 flex w-5/6 bg-slate-400 p-2'>
-      <Container className='flex h-fit flex-col items-center justify-center gap-1 pl-0'>
+    <Container className='mx-auto my-10 flex w-5/6 bg-zinc-100 pt-8'>
+      <Container className='flex h-fit flex-col items-center justify-center gap-4 pl-0'>
         <VideoUpload handleUploadVideo={onDrop} />
         <Video videoFile={video} subtitles={result.subtitles} />
         <VideoActions
