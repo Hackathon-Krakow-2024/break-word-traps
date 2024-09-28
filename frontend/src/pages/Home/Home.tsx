@@ -1,7 +1,7 @@
-import { Container, Typography } from '@mui/material'
+import { Container } from '@mui/material'
 import { ChangeEvent, useState } from 'react'
 
-import { predict } from '../../api/ai'
+import { getTranscriptAndSubtitles, analyzeText } from '../../api/ai'
 import { Video } from './Video'
 import { TranscriptionResponse } from '../../models/Transcription'
 
@@ -24,8 +24,21 @@ export const Home = () => {
   const handleClick = async () => {
     try {
       setIsLoading(true)
-      const result = await predict(video as File)
+      const result = await getTranscriptAndSubtitles(video as File)
       setResult(result)
+    } catch (e) {
+      console.log(e)
+    } finally {
+      setIsLoading(false)
+    }
+  }
+
+  const handleClick2 = async () => {
+    try {
+      setIsLoading(true)
+      await analyzeText(
+        'W budżecie na 2025 rok przeznaczymy ponad 221,7 mld zł na ochronę zdrowia. Wzrost nakładów o 31,7 mld zł (6,1%). 0,5 mld zł na program INVITRO, 0,8 mld zł na świadczenia aktywnych rodziców, 0,62 i 0,8 mld zł na program rodzina 800+.'
+      )
     } catch (e) {
       console.log(e)
     } finally {
@@ -53,7 +66,13 @@ export const Home = () => {
             disabled={isButtonDisabled}
             className='mb-2 me-2 w-fit rounded-lg bg-blue-700 px-5 py-2.5 text-sm font-medium text-white hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 disabled:bg-slate-600 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800'
           >
-            Predict
+            Transcribe
+          </button>
+          <button
+            onClick={handleClick2}
+            className='mb-2 me-2 w-fit rounded-lg bg-blue-700 px-5 py-2.5 text-sm font-medium text-white hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 disabled:bg-slate-600 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800'
+          >
+            Analyze
           </button>
           {isLoading ? (
             <div>Loading...</div>

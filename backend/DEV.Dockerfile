@@ -6,6 +6,7 @@ RUN apt-get update && apt-get install -y ffmpeg && rm -rf /var/lib/apt/lists/*
 WORKDIR /app
 
 ENV PYTHONPATH="/app/src"
+ARG OPENAI_API_KEY
 
 COPY . /app
 
