@@ -10,4 +10,5 @@ async def analyze_text(transcription: str):
         return {**fog_result, **prompt_result}
 
     except Exception as e:
+        print("Error in analyze_text:", e)
         raise HTTPException(status_code=400, detail="Something went wrong.")

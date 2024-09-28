@@ -1,5 +1,5 @@
 import { Container } from '@mui/material'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import { analyzeText, getTranscriptAndSubtitles } from '../../api/ai'
 import { TranscriptionResponse } from '../../models/Transcription'
@@ -18,6 +18,7 @@ export const Home = () => {
   const [transcriptionAnalysis, setTranscriptionAnalysis] = useState<TranscriptionAnalysis | null>(null)
 
   const [isLoading, setIsLoading] = useState<boolean>(false)
+  const [isButtonDisabled, setIsButtonDisabled] = useState<boolean>(true)
 
   const onDrop = (acceptedFiles: File[]) => {
     const videoFile = acceptedFiles[0]
@@ -25,9 +26,20 @@ export const Home = () => {
   }
 
   const [video, setVideo] = useState<File | null>(null)
-  const isButtonDisabled = !video || !!transcriptionAnalysis
+
+  useEffect(() => {
+    setIsButtonDisabled(!video)
+    setTranscription({
+      transcript: '',
+      subtitles: '',
+    })
+    setTranscriptionAnalysis(null)
+  }, [video])
 
   const handleVerifyVideo = async () => {
+    if (!video) return
+    setIsButtonDisabled(true)
+
     setTimeout(() => {
       window.scrollTo({
         top: document.body.scrollHeight,
@@ -36,7 +48,7 @@ export const Home = () => {
     })
     try {
       setIsLoading(true)
-      const result = await getTranscriptAndSubtitles(video as File)
+      const result = await getTranscriptAndSubtitles(video)
       setTranscription(result)
       const analysis = await analyzeText(result.transcript)
       setTranscriptionAnalysis(analysis)
