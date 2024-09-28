@@ -10,10 +10,12 @@ import Results from '../../components/Results'
 import LoadingIndicator from '../../components/LoadingIndicator'
 
 export const Home = () => {
-  const [result, setResult] = useState<TranscriptionResponse>({
-    transcript: '',
+  const [transcription, setTranscription] = useState<TranscriptionResponse>({
+    text: '',
     subtitles: '',
   })
+  const [transcriptionAnalysis, setTranscriptionAnalysis] = useState<TranscriptionAnalysisType | null>(null)
+
   const [isLoading, setIsLoading] = useState<boolean>(false)
 
   const onDrop = (acceptedFiles: File[]) => {
@@ -27,13 +29,33 @@ export const Home = () => {
   const handleVerifyVideo = async () => {
     setIsLoading(true)
     const result = {
-      transcript:
-        ' Kiedy wybrałeś dostosowany hotel pod wózek, ale nie możesz tam wjechać. Do stołówki masz podjazd, więc też nie możesz tam wjechać, ale jak już wjedziesz to jest duży próg, którego i tak nie pokonasz. A żeby nie było za dobrze, to do pokoju masz kilka schodków, a jak już się tam jakoś dostaniesz, to do pokoju masz próg. Także ja pierdolę.',
+      text: ' Kiedy wybrałeś dostosowany hotel pod wózek, ale nie możesz tam wjechać. Do stołówki masz podjazd, więc też nie możesz tam wjechać, ale jak już wjedziesz to jest duży próg, którego i tak nie pokonasz. A żeby nie było za dobrze, to do pokoju masz kilka schodków, a jak już się tam jakoś dostaniesz, to do pokoju masz próg. Także ja pierdolę.',
       subtitles:
         'WEBVTT\n\n00:00.000 --> 00:03.240\nKiedy wybrałeś dostosowany hotel pod wózek, ale nie możesz tam wjechać.\n\n00:03.240 --> 00:07.879\nDo stołówki masz podjazd, więc też nie możesz tam wjechać, ale jak już wjedziesz to jest duży próg, którego i tak nie pokonasz.\n\n00:07.879 --> 00:12.539\nA żeby nie było za dobrze, to do pokoju masz kilka schodków, a jak już się tam jakoś dostaniesz, to do pokoju masz próg.\n\n00:12.539 --> 00:13.820\nTakże ja pierdolę.',
     }
-    setResult(result)
+    setTranscription(result)
     setIsLoading(false)
+
+    setTranscriptionAnalysis({
+      fog_message: 'Wypowiedź jest prosta do zrozumienia.',
+      fog_score: 8.46,
+      sentiment: {
+        emotions: {
+          kind: 'neutral',
+          score: 5,
+        },
+        hateSpeech: false,
+      },
+      targetGroup: 'dorośli, wykształcenie średnie i wyższe',
+      grammarScore: 7.5,
+      tooManyNumbers: true,
+      hasJargon: false,
+      hasForeignLanguage: false,
+      hasNonExistentWords: false,
+      isPassive: false,
+      tooManyRepetitions: false,
+      hasTopicChange: false,
+    })
 
     // try {
     //   setIsLoading(true)
@@ -60,16 +82,20 @@ export const Home = () => {
   }
 
   return (
-    <Container className='mx-auto my-10 flex w-5/6 bg-zinc-100 pt-8'>
-      <Container className='flex h-fit flex-col items-center justify-center gap-4 pl-0'>
+    <Container className='mx-auto my-10 flex w-5/6 bg-slate-400 p-2'>
+      <Container className='flex h-fit flex-col items-center justify-center gap-1 pl-0'>
         <VideoUpload handleUploadVideo={onDrop} />
-        <Video videoFile={video} subtitles={result.subtitles} />
+        <Video videoFile={video} subtitles={transcription.subtitles} />
         <VideoActions
           handleVerifyVideo={handleVerifyVideo}
           handleClick2={handleClick2}
           isButtonDisabled={isButtonDisabled}
         />
-        {isLoading ? <LoadingIndicator /> : <Results result={result} />}
+        {isLoading ? (
+          <LoadingIndicator />
+        ) : (
+          <Results transcription={transcription} transcriptionAnalysis={transcriptionAnalysis} />
+        )}
       </Container>
     </Container>
   )
