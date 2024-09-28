@@ -179,6 +179,8 @@ Aplikacja używa dwóch modeli:
 - OpenAI Whisper,
 - OpenAI gpt-3.5-turbo
 
+</hr>
+
 ## Architektura
 ![diagram](https://github.com/user-attachments/assets/81fe4668-0eed-48bf-bee9-eea3aadc6fc6)
 
