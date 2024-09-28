@@ -47,8 +47,8 @@ export const Home = () => {
   }
 
   return (
-    <Container className='mx-auto my-10 flex h-screen w-5/6 overflow-y-scroll bg-slate-400 p-20'>
-      <Container className='flex h-fit flex-col items-center justify-center gap-1 pt-0'>
+    <Container className='mx-auto my-10 flex h-screen w-5/6 overflow-y-scroll bg-slate-400 p-2'>
+      <Container className='flex h-fit flex-col items-center justify-center gap-1 pl-0'>
         <Container className='flex flex-col items-start gap-2'>
           <label className='mb-2 block text-sm font-medium text-gray-900 dark:text-white' htmlFor='video'>
             Upload Video
