@@ -1,5 +1,5 @@
+import { TranscriptionAnalysis } from '../models/Transcription'
 import { ListItem } from './ListItem'
-import { TranscriptionAnalysis } from './Results'
 
 type Props = {
   transcriptionAnalysis: TranscriptionAnalysis

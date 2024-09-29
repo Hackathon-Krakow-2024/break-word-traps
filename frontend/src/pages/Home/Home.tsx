@@ -1,20 +1,41 @@
-import { Container } from '@mui/material'
+import { Gauge } from '@mui/x-charts/Gauge'
 import { useEffect, useState } from 'react'
 
 import { analyzeText, getTranscriptAndSubtitles } from '../../api/ai'
-import { TranscriptionResponse } from '../../models/Transcription'
+import { TranscriptionAnalysis, TranscriptionResponse } from '../../models/Transcription'
 import { Video } from './Video'
 import VideoUpload from '../../components/VideoUpload'
 import VideoActions from '../../components/VideoActions'
-import Results, { TranscriptionAnalysis } from '../../components/Results'
-import LoadingIndicator from '../../components/LoadingIndicator'
+import { ErrorList } from '../../components/ErrorList'
+// import LoadingIndicator from '../../components/LoadingIndicator'
+
+const emptyState = {
+  fog_message: '',
+  fog_score: 0,
+  sentiment: {
+    emotions: {
+      kind: '',
+      score: 0,
+    },
+    hateSpeech: false,
+  },
+  targetGroup: '',
+  grammarScore: 0,
+  tooManyNumbers: false,
+  hasJargon: false,
+  hasForeignLanguage: false,
+  hasNonExistentWords: false,
+  isPassive: false,
+  tooManyRepetitions: false,
+  hasTopicChange: false,
+}
 
 export const Home = () => {
   const [transcription, setTranscription] = useState<TranscriptionResponse>({
     transcript: '',
     subtitles: '',
   })
-  const [transcriptionAnalysis, setTranscriptionAnalysis] = useState<TranscriptionAnalysis | null>(null)
+  const [transcriptionAnalysis, setTranscriptionAnalysis] = useState<TranscriptionAnalysis>(emptyState)
 
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [isButtonDisabled, setIsButtonDisabled] = useState<boolean>(true)
@@ -32,19 +53,14 @@ export const Home = () => {
       transcript: '',
       subtitles: '',
     })
-    setTranscriptionAnalysis(null)
+    setTranscriptionAnalysis(emptyState)
   }, [video])
 
   const handleVerifyVideo = async () => {
     if (!video) return
     setIsButtonDisabled(true)
 
-    setTimeout(() => {
-      window.scrollTo({
-        top: document.body.scrollHeight,
-        behavior: 'smooth',
-      })
-    })
+    console.log(isLoading)
 
     // const result = {
     //   transcript:
@@ -90,16 +106,27 @@ export const Home = () => {
   }
 
   return (
-    <Container className='mx-auto flex w-5/6 bg-zinc-100 pt-24'>
-      <Container className='flex h-fit flex-col items-center justify-center gap-4 pl-0'>
+    <div className='grid grid-cols-2 grid-rows-2 bg-zinc-100 p-2'>
+      <div>
         <VideoUpload handleUploadVideo={onDrop} />
         <Video videoFile={video} subtitles={transcription.subtitles} />
         <VideoActions handleVerifyVideo={handleVerifyVideo} isButtonDisabled={isButtonDisabled} />
-        {isLoading && <LoadingIndicator />}
-        {transcriptionAnalysis && (
-          <Results transcription={transcription} transcriptionAnalysis={transcriptionAnalysis} />
-        )}
-      </Container>
-    </Container>
+      </div>
+      <div>
+        <Gauge width={100} height={100} value={60} />
+        <Gauge width={100} height={100} value={60} />
+        <Gauge width={100} height={100} value={60} />
+      </div>
+      <div>
+        <div className='flex flex-col items-center'>
+          <h2 className='mb-2 text-lg font-medium'>Wyniki analizy</h2>
+          <p className='text-sm text-gray-900 dark:text-white'>{transcription.transcript}</p>
+          <p>Pytania</p>
+        </div>
+      </div>
+      <div>
+        <ErrorList transcriptionAnalysis={transcriptionAnalysis} />
+      </div>
+    </div>
   )
 }
