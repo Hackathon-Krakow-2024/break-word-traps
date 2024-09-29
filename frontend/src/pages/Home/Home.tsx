@@ -80,25 +80,23 @@ export const Home = () => {
   }
 
   return (
-    <div className='grid grid-cols-1 grid-rows-2 gap-4 p-4 lg:grid-cols-2'>
-      <div className='flex flex-col items-center'>
+    <div className='grid grid-cols-1 grid-rows-2 gap-4 p-4 lg:grid-cols-2' style={{ gridTemplateRows: 'auto 1fr' }}>
+      <div className='flex flex-col items-center' style={{ minHeight: '200px' }}>
         <VideoUpload handleUploadVideo={onDrop} />
         <Video videoFile={video} subtitles={transcription.subtitles} />
         <VideoActions handleVerifyVideo={handleVerifyVideo} isButtonDisabled={isButtonDisabled} />
-        Analiza zajmuje około 2 sekund na każdą sekundę wideo.
+        <p className='text-sm'>Analiza zajmuje około 2 sekund na każdą sekundę wideo.</p>
+      </div>
+      <div className='flex flex-col items-center' style={{ minHeight: '200px' }}>
+        <Gauge width={100} height={100} value={60} />
+        <Gauge width={100} height={100} value={60} />
+        <Gauge width={100} height={100} value={60} />
       </div>
       <div className='flex flex-col items-center'>
-        <Gauge width={100} height={100} value={60} />
-        <Gauge width={100} height={100} value={60} />
-        <Gauge width={100} height={100} value={60} />
-      </div>
-      <div>
-        <div className='flex flex-col items-center'>
-          <p className='m-3 rounded-xl border-2 border-blue-300 bg-blue-200 p-3 text-sm text-gray-900'>
-            {transcription.transcript}
-          </p>
-          <QuestionList questions={questions} />
-        </div>
+        <p className='m-3 rounded-xl border-2 border-blue-300 bg-blue-200 p-3 text-sm text-gray-900'>
+          {transcription.transcript}
+        </p>
+        <QuestionList questions={questions} />
       </div>
       <div>
         <ErrorList transcriptionAnalysis={transcriptionAnalysis} />

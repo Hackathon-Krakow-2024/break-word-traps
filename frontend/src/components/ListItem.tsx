@@ -45,7 +45,19 @@ const items: Record<string, { text: string; description: string }> = {
 export const ListItem = ({ type, value }: Props) => {
   if (type in items) {
     return (
-      <div className='flex w-fit items-center gap-2'>
+      <div
+        className='flex w-fit items-center gap-2 text-left'
+        style={
+          value
+            ? {
+                textDecorationLine: 'underline',
+                textDecorationStyle: 'wavy',
+                textDecorationColor: '#ef4444',
+                textUnderlineOffset: '4px',
+              }
+            : {}
+        }
+      >
         {value && <CheckIcon htmlColor='red' fontSize='small' />}
         <Typography className={`mb-2 text-center ${value && 'text-red-500'}`}>{items[type].text}</Typography>
         <Tooltip title={items[type].description} arrow placement='top-end'>
