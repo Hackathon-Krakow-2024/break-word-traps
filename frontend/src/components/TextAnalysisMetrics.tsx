@@ -40,30 +40,33 @@ const TextAnalysisMetrics: React.FC<Props> = ({ transcriptionAnalysis }) => {
   }
 
   return (
-    <div className='grid grid-cols-2 gap-4' style={{ minHeight: '200px' }}>
-      <GaugeWidget
-        color={getFogColor(transcriptionAnalysis.fog_score)}
-        label='Zrozumiałość'
-        value={getInvertedFogScore(transcriptionAnalysis.fog_score)}
-        customText={transcriptionAnalysis.fog_message}
-        valueMax={18}
-      />
-      <GaugeWidget
-        color={getColor(transcriptionAnalysis.grammarScore)}
-        label='Poprawność gramatyczna'
-        value={transcriptionAnalysis.grammarScore}
-        valueMax={10}
-      />
-      <Widget label='Typ emocji' customText={transcriptionAnalysis.sentiment.emotions.kind}>
-        <div className='mb-2 mt-7'>
-          <SentimentSatisfiedIcon sx={{ fontSize: 40, color: grey[400] }} />
-        </div>
-      </Widget>
-      <Widget label='Docelowy odbiorca' customText={transcriptionAnalysis.targetGroup}>
-        <div className='mb-2 mt-7'>
-          <Groups2Icon sx={{ fontSize: 40, color: grey[400] }} />
-        </div>
-      </Widget>
+    <div className='mb-5 p-6'>
+      <h2 className='mb-2 text-center text-xl font-semibold'>Metryki Transkrypcji</h2>
+      <div className='mt-4 grid grid-cols-2 gap-4' style={{ minHeight: '200px' }}>
+        <GaugeWidget
+          color={getFogColor(transcriptionAnalysis.fog_score)}
+          label='Zrozumiałość'
+          value={getInvertedFogScore(transcriptionAnalysis.fog_score)}
+          customText={transcriptionAnalysis.fog_message}
+          valueMax={18}
+        />
+        <GaugeWidget
+          color={getColor(transcriptionAnalysis.grammarScore)}
+          label='Poprawność gramatyczna'
+          value={transcriptionAnalysis.grammarScore}
+          valueMax={10}
+        />
+        <Widget label='Typ emocji' customText={transcriptionAnalysis.sentiment.emotions.kind}>
+          <div className='mb-2 mt-7'>
+            <SentimentSatisfiedIcon sx={{ fontSize: 40, color: grey[400] }} />
+          </div>
+        </Widget>
+        <Widget label='Docelowy odbiorca' customText={transcriptionAnalysis.targetGroup}>
+          <div className='mb-2 mt-7'>
+            <Groups2Icon sx={{ fontSize: 40, color: grey[400] }} />
+          </div>
+        </Widget>
+      </div>
     </div>
   )
 }
