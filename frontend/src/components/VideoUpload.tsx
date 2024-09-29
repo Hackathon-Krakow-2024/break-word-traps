@@ -34,10 +34,10 @@ const VideoUpload = ({ handleUploadVideo }: VideoUploadProps) => {
   })
 
   return (
-    <div className='flex w-[640px] flex-col'>
+    <div className='flex w-full min-w-[640px] flex-col'>
       <Box
         {...getRootProps()}
-        className={`w-full cursor-pointer rounded-lg border-2 border-dashed p-6 ${isDragActive ? 'border-sky-300 bg-blue-50' : 'border-sky-600 bg-white'} `}
+        className={`cursor-pointer rounded-lg border-2 border-dashed p-6 ${isDragActive ? 'border-sky-300 bg-blue-50' : 'border-sky-600 bg-white'} `}
       >
         <input {...getInputProps()} />
 
