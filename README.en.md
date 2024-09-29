@@ -1,6 +1,6 @@
 [Polish :poland:](./README.md)
 
-# WordsSmoothie
+# Words Smoothie
 
 ##### Table of contents
 
@@ -19,6 +19,7 @@
    - [**Backend (Server layer)**](#backend-tools)
    - [**AI**](#ai-tools)
 4. [**Architecture**](#architecture)
+5. [**Estimated Cost**](#cost)
 
 </hr>
 
@@ -179,7 +180,6 @@ The application uses two models:
 
 </hr>
 
-## Architecture
-![diagram](https://github.com/user-attachments/assets/81fe4668-0eed-48bf-bee9-eea3aadc6fc6)
-
-The application allows the user to upload a video file from disk and analyze it. The first step required for analysis is to extract the audio track from the video. Then an audio transcription is generated using the AI model `Whisper` (medium version) by `OpenAI`. The model is stored locally, on our server. The next step is to analyze the text using the AI model `gpt-3.5-turbo` using `API OpenAI`. The analysis results are presented visually to the user.
+## Cost
+The cost of using the `gpt-3.5-turbo` model for one video of 30 seconds is about `$0.0030`.
+The cost is calculated based on the `OpenAPI` price list - $3 for 1 million input tokens and $6 for 1 million output tokens. The application generates a fixed number of input tokens at 400 tokens per video file, plus the number of tokens depending on the length of the video. The amount of output tokens is fixed at 200 tokens.
