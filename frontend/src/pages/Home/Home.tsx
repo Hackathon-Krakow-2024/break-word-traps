@@ -10,7 +10,7 @@ import QuestionList from '../../components/QuestionList'
 import { Widget } from '../../components/Widget'
 import Groups2Icon from '@mui/icons-material/Groups2'
 import SentimentSatisfiedIcon from '@mui/icons-material/SentimentSatisfied'
-import { blue, grey } from '@mui/material/colors'
+import { grey } from '@mui/material/colors'
 // import LoadingIndicator from '../../components/LoadingIndicator'
 
 const emptyState = {
