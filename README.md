@@ -28,6 +28,9 @@
 >
 > Wymagania techniczne to możliwość uruchomienia aplikacji Docker lub Node.js oraz Python.
 
+> [!IMPORTANT]  
+> Do poprawnego uruchomienia aplikacji wymagany jest [klucz API do OpenAI](https://platform.openai.com/docs/quickstart/create-and-export-an-api-key) z funduszami.
+
 ## Uruchomienie
 
 ### Uruchomienie z użyciem Docker
