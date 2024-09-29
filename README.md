@@ -1,6 +1,6 @@
 [English :us:](./README.en.md)
 
-# WordsSmoothie
+# Words Smoothie
 
 ##### Spis treści
 
