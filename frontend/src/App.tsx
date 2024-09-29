@@ -7,12 +7,10 @@ function App() {
   return (
     <BrowserRouter>
       <Header />
-      <div className='overflow-y-auto'>
-        <Routes>
-          <Route path='/' element={<Home />} />
-          <Route path='/contact' element={<Contact />} />
-        </Routes>
-      </div>
+      <Routes>
+        <Route path='/' element={<Home />} />
+        <Route path='/contact' element={<Contact />} />
+      </Routes>
     </BrowserRouter>
   )
 }
