@@ -62,7 +62,6 @@ export const Home = () => {
   const handleVerifyVideo = async () => {
     if (!video) return
     setIsButtonDisabled(true)
-    console.log(isLoading)
 
     try {
       setIsLoading(true)
@@ -84,7 +83,7 @@ export const Home = () => {
       <div className='flex flex-col items-center' style={{ minHeight: '200px' }}>
         <VideoUpload handleUploadVideo={onDrop} />
         <Video videoFile={video} subtitles={transcription.subtitles} />
-        <VideoActions handleVerifyVideo={handleVerifyVideo} isButtonDisabled={isButtonDisabled} />
+        <VideoActions handleVerifyVideo={handleVerifyVideo} isButtonDisabled={isButtonDisabled} isLoading={isLoading} />
         <p className='text-xs text-gray-500'>Analiza zajmuje około 2 sekund na każdą sekundę wideo.</p>
       </div>
 
