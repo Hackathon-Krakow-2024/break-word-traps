@@ -40,7 +40,6 @@ export const analyzeText = async (transcription: string): Promise<TranscriptionA
       sentiment: {
         emotions: {
           kind: '',
-          score: 0,
         },
         hateSpeech: false,
       },
@@ -71,6 +70,6 @@ export async function prepareQuestions(transcription: string): Promise<string[]>
     return data
   } catch (e) {
     console.log(e)
-    return  []
+    return []
   }
 }

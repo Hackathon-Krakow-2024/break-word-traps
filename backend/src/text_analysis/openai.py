@@ -26,7 +26,6 @@ def analyze_transcription_prompt_ai(text: str):
   "sentiment": {{
     "emotions": {{
       "kind": "string"
-      "score": "float" // 1 to ekstreamlnie negatywny, 10 to ekstremalnie pozytywny
     }}
     "hateSpeech": "boolean"
   }},

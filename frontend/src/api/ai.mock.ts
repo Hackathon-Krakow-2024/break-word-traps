@@ -14,7 +14,7 @@ export const analyzeText = async (transcription: string): Promise<TranscriptionA
   return {
     fog_message: 'Wypowiedź jest trudna do zrozumienia.',
     fog_score: 37.6,
-    sentiment: { emotions: { kind: 'neutral', score: 5.0 }, hateSpeech: false },
+    sentiment: { emotions: { kind: 'neutral' }, hateSpeech: false },
     targetGroup: 'dorośli, średnie/wyższe wykształcenie',
     grammarScore: 7.5,
     tooManyNumbers: false,

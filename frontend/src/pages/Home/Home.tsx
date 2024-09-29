@@ -15,7 +15,6 @@ const emptyState = {
   sentiment: {
     emotions: {
       kind: '',
-      score: 0,
     },
     hateSpeech: false,
   },
@@ -112,13 +111,7 @@ export const Home = () => {
           value={transcriptionAnalysis.grammarScore}
           valueMax={10}
         />
-        <GaugeWidget
-          color={getColor(transcriptionAnalysis.sentiment.emotions.score)}
-          label='Typ emocji'
-          value={transcriptionAnalysis.sentiment.emotions.score}
-          customText={transcriptionAnalysis.sentiment.emotions.kind}
-          valueMax={10}
-        />
+        <GaugeWidget label='Typ emocji' />
         <GaugeWidget label='Docelowy odbiorca' customText={transcriptionAnalysis.targetGroup} />
       </div>
       <div className='flex flex-col items-center'>

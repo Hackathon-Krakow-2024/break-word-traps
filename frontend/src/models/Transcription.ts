@@ -6,7 +6,6 @@ export type TranscriptionResponse = {
 export type Sentiment = {
   emotions: {
     kind: string // typ emocji, np. 'neutral', 'positive', 'negative'
-    score: number // wynik emocji
   }
   hateSpeech: boolean // informacja o mowie nienawiści
 }
