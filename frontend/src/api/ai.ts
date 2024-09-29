@@ -56,3 +56,21 @@ export const analyzeText = async (transcription: string): Promise<TranscriptionA
     }
   }
 }
+
+export async function prepareQuestions(transcription: string): Promise<string[]> {
+  try {
+    const response = await fetch(`${API}/prepare-question`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ transcription }),
+    })
+    const data = await response.json()
+
+    return data
+  } catch (e) {
+    console.log(e)
+    return  []
+  }
+}
