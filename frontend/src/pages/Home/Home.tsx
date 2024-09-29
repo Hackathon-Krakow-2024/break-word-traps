@@ -86,9 +86,13 @@ export const Home = () => {
     <div className='grid grid-cols-1 grid-rows-2 gap-4 p-4 lg:grid-cols-2' style={{ gridTemplateRows: 'auto 1fr' }}>
       <div className='flex flex-col items-center' style={{ minHeight: '200px' }}>
         <VideoUpload handleUploadVideo={onDrop} />
-        <Video videoFile={video} subtitles={transcription.subtitles} />
+        <Video videoFile={video} subtitles={transcription?.subtitles} />
         <VideoActions handleVerifyVideo={handleVerifyVideo} isButtonDisabled={isButtonDisabled} isLoading={isLoading} />
-        {successAlertVisible && <Alert className="mb-2" icon={<CheckIcon fontSize="inherit" />} severity="success">Analiza zakończona</Alert> }
+        {successAlertVisible && (
+          <Alert className='mb-2' icon={<CheckIcon fontSize='inherit' />} severity='success'>
+            Analiza zakończona
+          </Alert>
+        )}
         <p className='text-xs text-gray-500'>Analiza zajmuje około 2 sekund na każdą sekundę wideo.</p>
       </div>
 
@@ -98,12 +102,12 @@ export const Home = () => {
         {transcription?.transcript?.length > 0 && (
           <Box className='mb-5 rounded-lg border border-solid border-gray-300 bg-white p-6'>
             <h2 className='mb-2 text-xl font-semibold'>Transkrypcja nagrania:</h2>
-            <Typography className='text-sm text-gray-900'>{transcription.transcript}</Typography>
+            <Typography className='text-sm text-gray-900'>{transcription?.transcript}</Typography>
           </Box>
         )}
         <QuestionList questions={questions} />
       </div>
-      <div className="-mt-14">
+      <div className='-mt-14'>
         <ErrorList transcriptionAnalysis={transcriptionAnalysis} />
       </div>
     </div>
