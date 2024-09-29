@@ -28,6 +28,9 @@
 >
 > The technical requirements are being able to run Docker or Node.js and Python.
 
+> [!IMPORTANT]  
+> In order to run the application correctly, the [API key for OpenAI](https://platform.openai.com/docs/quickstart/create-and-export-an-api-key) with funds on it, stored as environment variable `OPENAI_API_KEY` is required.
+
 ## Running the application
 
 ### Running the application with Docker
