@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { Box, Typography } from '@mui/material'
 import { GaugeWidget } from '../../components/GaugeWidget'
 import { analyzeText, getTranscriptAndSubtitles, prepareQuestions } from '../../api/ai'
 import { TranscriptionAnalysis, TranscriptionResponse } from '../../models/Transcription'
@@ -106,7 +107,7 @@ export const Home = () => {
         <VideoUpload handleUploadVideo={onDrop} />
         <Video videoFile={video} subtitles={transcription.subtitles} />
         <VideoActions handleVerifyVideo={handleVerifyVideo} isButtonDisabled={isButtonDisabled} />
-        <p className='text-sm'>Analiza zajmuje około 2 sekund na każdą sekundę wideo.</p>
+        <p className='text-xs text-gray-500'>Analiza zajmuje około 2 sekund na każdą sekundę wideo.</p>
       </div>
       <div className='grid grid-cols-2 gap-4' style={{ minHeight: '200px' }}>
         <GaugeWidget
@@ -133,11 +134,12 @@ export const Home = () => {
           </div>
         </Widget>
       </div>
-      <div className='flex flex-col items-center'>
+      <div className='flex cursor-pointer flex-col items-center'>
         {transcription?.transcript?.length > 0 && (
-          <p className='m-3 rounded-xl border-2 border-blue-300 bg-blue-200 p-3 text-sm text-gray-900'>
-            {transcription.transcript}
-          </p>
+          <Box className='mb-5 rounded-lg border border-solid border-gray-300 bg-white p-6'>
+            <h2 className='mb-2 text-xl font-semibold'>Transkrypcja nagrania:</h2>
+            <Typography className='text-sm text-gray-900'>{transcription.transcript}</Typography>
+          </Box>
         )}
         <QuestionList questions={questions} />
       </div>
