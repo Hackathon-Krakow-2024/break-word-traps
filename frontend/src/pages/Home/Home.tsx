@@ -1,7 +1,6 @@
-import { Gauge } from '@mui/x-charts/Gauge'
 import { useEffect, useState } from 'react'
 import { GaugeWidget } from '../../components/GaugeWidget'
-import { analyzeText, getTranscriptAndSubtitles, prepareQuestions } from '../../api/ai.mock'
+import { analyzeText, getTranscriptAndSubtitles, prepareQuestions } from '../../api/ai'
 import { TranscriptionAnalysis, TranscriptionResponse } from '../../models/Transcription'
 import { Video } from './Video'
 import VideoUpload from '../../components/VideoUpload'
@@ -99,7 +98,7 @@ export const Home = () => {
         <VideoActions handleVerifyVideo={handleVerifyVideo} isButtonDisabled={isButtonDisabled} />
         <p className='text-sm'>Analiza zajmuje około 2 sekund na każdą sekundę wideo.</p>
       </div>
-      <div className='flex items-center gap-8' style={{ minHeight: '200px' }}>
+      <div className='grid grid-cols-2 gap-4' style={{ minHeight: '200px' }}>
         <GaugeWidget
           color={getFogColor(transcriptionAnalysis.fog_score)}
           label='Zrozumiałość'
