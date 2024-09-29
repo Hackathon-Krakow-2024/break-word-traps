@@ -20,7 +20,7 @@ export const GaugeWidget = ({
     red: '#f44336',
   }
   return (
-    <Card className='mx-auto min-w-[310px] max-w-sm overflow-hidden rounded-lg shadow-lg'>
+    <Card className='mx-auto h-[240px] w-[200px] max-w-sm overflow-hidden rounded-lg shadow-lg'>
       <CardContent className='flex flex-col items-center justify-center p-6'>
         <Typography variant='h5' className='mb-4 text-center font-bold text-gray-800'>
           {label}
