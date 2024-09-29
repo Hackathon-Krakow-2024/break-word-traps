@@ -1,7 +1,7 @@
 import { Gauge } from '@mui/x-charts/Gauge'
 import { useEffect, useState } from 'react'
-
-import { analyzeText, getTranscriptAndSubtitles, prepareQuestions } from '../../api/ai'
+import { GaugeWidget } from '../../components/GaugeWidget'
+import { analyzeText, getTranscriptAndSubtitles, prepareQuestions } from '../../api/ai.mock'
 import { TranscriptionAnalysis, TranscriptionResponse } from '../../models/Transcription'
 import { Video } from './Video'
 import VideoUpload from '../../components/VideoUpload'
@@ -79,6 +79,18 @@ export const Home = () => {
     }
   }
 
+  const getFogColor = (fogScore: number) => {
+    if (fogScore < 7) return 'green'
+    if (fogScore < 13) return 'yellow'
+    return 'red'
+  }
+
+  const getColor = (value: number) => {
+    if (value < 4) return 'red'
+    if (value < 7) return 'yellow'
+    return 'green'
+  }
+
   return (
     <div className='grid grid-cols-1 grid-rows-2 gap-4 p-4 lg:grid-cols-2' style={{ gridTemplateRows: 'auto 1fr' }}>
       <div className='flex flex-col items-center' style={{ minHeight: '200px' }}>
@@ -87,10 +99,28 @@ export const Home = () => {
         <VideoActions handleVerifyVideo={handleVerifyVideo} isButtonDisabled={isButtonDisabled} />
         <p className='text-sm'>Analiza zajmuje około 2 sekund na każdą sekundę wideo.</p>
       </div>
-      <div className='flex flex-col items-center' style={{ minHeight: '200px' }}>
-        <Gauge width={100} height={100} value={60} />
-        <Gauge width={100} height={100} value={60} />
-        <Gauge width={100} height={100} value={60} />
+      <div className='flex items-center gap-8' style={{ minHeight: '200px' }}>
+        <GaugeWidget
+          color={getFogColor(transcriptionAnalysis.fog_score)}
+          label='Zrozumiałość'
+          value={transcriptionAnalysis.fog_score}
+          customText={transcriptionAnalysis.fog_message}
+          valueMax={18}
+        />
+        <GaugeWidget
+          color={getColor(transcriptionAnalysis.grammarScore)}
+          label='Poprawność gramatyczna'
+          value={transcriptionAnalysis.grammarScore}
+          valueMax={10}
+        />
+        <GaugeWidget
+          color={getColor(transcriptionAnalysis.sentiment.emotions.score)}
+          label='Typ emocji'
+          value={transcriptionAnalysis.sentiment.emotions.score}
+          customText={transcriptionAnalysis.sentiment.emotions.kind}
+          valueMax={10}
+        />
+        <GaugeWidget label='Docelowy odbiorca' customText={transcriptionAnalysis.targetGroup} />
       </div>
       <div className='flex flex-col items-center'>
         <p className='m-3 rounded-xl border-2 border-blue-300 bg-blue-200 p-3 text-sm text-gray-900'>
