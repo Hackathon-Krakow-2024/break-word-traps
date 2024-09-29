@@ -61,7 +61,11 @@ export const ListItem = ({ type, value }: Props) => {
         {value && <CheckIcon htmlColor='red' fontSize='small' />}
         <Typography className={`mb-2 text-center ${value && 'text-red-500'}`}>{items[type].text}</Typography>
         <Tooltip title={items[type].description} arrow placement='top-end'>
-          <InfoIcon htmlColor='#9ca3af' fontSize='small' sx={{ '&:hover': { color: '#d1d5db' } }} />
+          <InfoIcon
+            htmlColor={value ? '#ef4444' : '#9ca3af'}
+            fontSize='small'
+            sx={{ '&:hover': { color: value ? '#f87171' : '#d1d5db' } }}
+          />
         </Tooltip>
       </div>
     )
