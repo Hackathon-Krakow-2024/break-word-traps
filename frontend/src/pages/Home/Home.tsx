@@ -1,12 +1,13 @@
 import { Gauge } from '@mui/x-charts/Gauge'
 import { useEffect, useState } from 'react'
 
-import { analyzeText, getTranscriptAndSubtitles } from '../../api/ai'
+import { analyzeText, getTranscriptAndSubtitles, prepareQuestions } from '../../api/ai'
 import { TranscriptionAnalysis, TranscriptionResponse } from '../../models/Transcription'
 import { Video } from './Video'
 import VideoUpload from '../../components/VideoUpload'
 import VideoActions from '../../components/VideoActions'
 import { ErrorList } from '../../components/ErrorList'
+import QuestionList from '../../components/QuestionList'
 // import LoadingIndicator from '../../components/LoadingIndicator'
 
 const emptyState = {
@@ -36,6 +37,7 @@ export const Home = () => {
     subtitles: '',
   })
   const [transcriptionAnalysis, setTranscriptionAnalysis] = useState<TranscriptionAnalysis>(emptyState)
+  const [questions, setQuestions] = useState<string[]>([])
 
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [isButtonDisabled, setIsButtonDisabled] = useState<boolean>(true)
@@ -54,6 +56,7 @@ export const Home = () => {
       subtitles: '',
     })
     setTranscriptionAnalysis(emptyState)
+    setQuestions([])
   }, [video])
 
   const handleVerifyVideo = async () => {
@@ -98,6 +101,8 @@ export const Home = () => {
       setTranscription(result)
       const analysis = await analyzeText(result.transcript)
       setTranscriptionAnalysis(analysis)
+      const questions = await prepareQuestions(result.transcript)
+      setQuestions(questions)
     } catch (e) {
       console.log(e)
     } finally {
@@ -120,8 +125,8 @@ export const Home = () => {
       <div>
         <div className='flex flex-col items-center'>
           <h2 className='mb-2 text-lg font-medium'>Wyniki analizy</h2>
-          <p className='text-sm text-gray-900 dark:text-white'>{transcription.transcript}</p>
-          <p>Pytania</p>
+          <p className='text-sm text-gray-900 m-3 p-3 border-2 bg-blue-200 border-blue-300 rounded-xl'>{transcription.transcript}</p>
+          <QuestionList questions={questions} />
         </div>
       </div>
       <div>
