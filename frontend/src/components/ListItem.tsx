@@ -46,7 +46,7 @@ export const ListItem = ({ type, value }: Props) => {
   if (type in items) {
     return (
       <div
-        className='flex w-fit items-center gap-2 text-left'
+        className='flex w-fit gap-2 text-left mb-1 items-center'
         style={
           value
             ? {
@@ -59,10 +59,10 @@ export const ListItem = ({ type, value }: Props) => {
         }
       >
         {value && <ReportProblemIcon htmlColor='red' fontSize='small' />}
-        <span className={`text-lg ${value && 'text-red-500'}`}>{items[type].text}</span>
+        <span className={`text-nowrap text-lg  ${value && 'text-red-500'} ${!value && 'text-gray-500 ml-7'}`}>{items[type].text}</span>
         <Tooltip title={items[type].description} arrow placement='top-end'>
           <InfoIcon
-            htmlColor='#8aa3c4'
+            htmlColor='#a9bdd2'
             fontSize='small'
           />
         </Tooltip>
