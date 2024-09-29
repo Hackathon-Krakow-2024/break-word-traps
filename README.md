@@ -19,6 +19,7 @@
    - [**Backend (warstwa serwerowa)**](#narzędzia-backend)
    - [**AI**](#narzędzia-ai)
 4. [**Architektura**](#architektura)
+5. [**Estymowany koszt**](#koszt)
 
 </hr>
 
@@ -185,3 +186,9 @@ Aplikacja używa dwóch modeli:
 ![diagram](https://github.com/user-attachments/assets/81fe4668-0eed-48bf-bee9-eea3aadc6fc6)
 
 Aplikacja pozwala użytkownikowi na załadowanie pliku wideo z dysku i jego analizę. Pierwszym krokiem niezbędnym do analizy jest wyciągnięcie ścieżki dźwiękowej z filmu. Następnie generowana jest transkrypcja audio za pomocą modelu AI `Whisper` (wersja medium) autorstwa `OpenAI`. Model jest wywoływany lokalnie, na naszym serwerze. Kolejnym krokiem jest analiza tekstu przy użyciu modelu AI `gpt-3.5-turbo` za pomocą `API OpenAI`. Wyniki analizy przedstawione są wizualnie użytkownikowi.
+
+</hr>
+
+## Koszt
+Koszt użycia modelu `gpt-3.5-turbo` dla jednego filmu o długości 30 sekund to okolo `0.0030 USD`.
+Koszt liczony jest na podstawie cennika `OpenAPI` - 3 USD za 1 milion input tokenów i 6 USD za 1 milion output tokenów. Aplikacja generuja stałą ilość input tokenów w ilości 400 tokenów za jeden plik wideo, plus ilość tokenów zależna od długości wideo. Ilość output tokenów jest stała i wynosi 200 tokenów.
