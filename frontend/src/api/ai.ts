@@ -1,5 +1,4 @@
-import { TranscriptionAnalysis } from '../components/Results'
-import { TranscriptionResponse } from '../models/Transcription'
+import { TranscriptionAnalysis, TranscriptionResponse } from '../models/Transcription'
 
 const API = import.meta.env.VITE_API_BASE_URL || 'http://localhost:7860'
 
