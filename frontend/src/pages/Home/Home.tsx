@@ -111,7 +111,7 @@ export const Home = () => {
           value={transcriptionAnalysis.grammarScore}
           valueMax={10}
         />
-        <GaugeWidget label='Typ emocji' />
+        <GaugeWidget label='Typ emocji' customText={transcriptionAnalysis.sentiment.emotions.kind} />
         <GaugeWidget label='Docelowy odbiorca' customText={transcriptionAnalysis.targetGroup} />
       </div>
       <div className='flex flex-col items-center'>
