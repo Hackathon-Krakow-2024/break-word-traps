@@ -1,5 +1,5 @@
-import { Card, CardContent, Typography } from '@mui/material'
 import { Gauge, gaugeClasses } from '@mui/x-charts'
+import { Widget } from './Widget'
 
 export const GaugeWidget = ({
   label,
@@ -9,8 +9,8 @@ export const GaugeWidget = ({
   customText,
 }: {
   label: string
-  value?: number
-  valueMax?: number
+  value: number
+  valueMax: number
   color?: 'green' | 'yellow' | 'red'
   customText?: string
 }) => {
@@ -20,36 +20,25 @@ export const GaugeWidget = ({
     red: '#f44336',
   }
   return (
-    <Card className='mx-auto h-[240px] w-[200px] max-w-sm overflow-hidden rounded-lg shadow-lg'>
-      <CardContent className='flex flex-col items-center justify-center p-6'>
-        <Typography variant='h5' className='mb-4 text-center font-bold text-gray-800'>
-          {label}
-        </Typography>
-
-        {valueMax && (
-          <div className='h-[100px] w-[100px]'>
-            <Gauge
-              value={(value as number) > valueMax ? valueMax : value}
-              valueMax={valueMax}
-              startAngle={-110}
-              endAngle={110}
-              sx={{
-                [`& .${gaugeClasses.valueText}`]: {
-                  fontSize: 15,
-                  transform: 'translate(0px, 0px)',
-                },
-                [`& .${gaugeClasses.valueArc}`]: {
-                  fill: colorMap[color as 'green' | 'yellow' | 'red'],
-                },
-              }}
-              text={() => ``}
-            />
-          </div>
-        )}
-        <Typography variant='body2' className='text-center text-gray-600'>
-          {customText && <span className='font-bold'>{customText}</span>}
-        </Typography>
-      </CardContent>
-    </Card>
+    <Widget label={label} customText={customText}>
+      <div className='h-[100px] w-[100px]'>
+        <Gauge
+          value={value > valueMax ? valueMax : value}
+          valueMax={valueMax}
+          startAngle={-110}
+          endAngle={110}
+          sx={{
+            [`& .${gaugeClasses.valueText}`]: {
+              fontSize: 15,
+              transform: 'translate(0px, 0px)',
+            },
+            [`& .${gaugeClasses.valueArc}`]: {
+              fill: colorMap[color as 'green' | 'yellow' | 'red'],
+            },
+          }}
+          text={() => ``}
+        />
+      </div>
+    </Widget>
   )
 }

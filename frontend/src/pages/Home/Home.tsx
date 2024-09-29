@@ -1,12 +1,16 @@
 import { useEffect, useState } from 'react'
 import { GaugeWidget } from '../../components/GaugeWidget'
-import { analyzeText, getTranscriptAndSubtitles, prepareQuestions } from '../../api/ai'
+import { analyzeText, getTranscriptAndSubtitles, prepareQuestions } from '../../api/ai.mock'
 import { TranscriptionAnalysis, TranscriptionResponse } from '../../models/Transcription'
 import { Video } from './Video'
 import VideoUpload from '../../components/VideoUpload'
 import VideoActions from '../../components/VideoActions'
 import { ErrorList } from '../../components/ErrorList'
 import QuestionList from '../../components/QuestionList'
+import { Widget } from '../../components/Widget'
+import Groups2Icon from '@mui/icons-material/Groups2'
+import SentimentSatisfiedIcon from '@mui/icons-material/SentimentSatisfied'
+import { grey } from '@mui/material/colors'
 // import LoadingIndicator from '../../components/LoadingIndicator'
 
 const emptyState = {
@@ -77,6 +81,13 @@ export const Home = () => {
     }
   }
 
+  const getInvertedFogScore = (fogScore: number) => {
+    if (fogScore === 0) return 0
+    if (fogScore > 18) return 0
+
+    return 18 - fogScore
+  }
+
   const getFogColor = (fogScore: number) => {
     if (fogScore < 7) return 'green'
     if (fogScore < 13) return 'yellow'
@@ -101,7 +112,7 @@ export const Home = () => {
         <GaugeWidget
           color={getFogColor(transcriptionAnalysis.fog_score)}
           label='Zrozumiałość'
-          value={transcriptionAnalysis.fog_score}
+          value={getInvertedFogScore(transcriptionAnalysis.fog_score)}
           customText={transcriptionAnalysis.fog_message}
           valueMax={18}
         />
@@ -111,8 +122,16 @@ export const Home = () => {
           value={transcriptionAnalysis.grammarScore}
           valueMax={10}
         />
-        <GaugeWidget label='Typ emocji' customText={transcriptionAnalysis.sentiment.emotions.kind} />
-        <GaugeWidget label='Docelowy odbiorca' customText={transcriptionAnalysis.targetGroup} />
+        <Widget label='Typ emocji' customText={transcriptionAnalysis.sentiment.emotions.kind}>
+          <div className='mb-2 mt-7'>
+            <SentimentSatisfiedIcon sx={{ fontSize: 40, color: grey[400] }} />
+          </div>
+        </Widget>
+        <Widget label='Docelowy odbiorca' customText={transcriptionAnalysis.targetGroup}>
+          <div className='mb-2 mt-7'>
+            <Groups2Icon sx={{ fontSize: 40, color: grey[400] }} />
+          </div>
+        </Widget>
       </div>
       <div className='flex flex-col items-center'>
         {transcription?.transcript?.length > 0 && (
