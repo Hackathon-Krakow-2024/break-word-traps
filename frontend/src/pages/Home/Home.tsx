@@ -115,9 +115,11 @@ export const Home = () => {
         <GaugeWidget label='Docelowy odbiorca' customText={transcriptionAnalysis.targetGroup} />
       </div>
       <div className='flex flex-col items-center'>
-        <p className='m-3 rounded-xl border-2 border-blue-300 bg-blue-200 p-3 text-sm text-gray-900'>
-          {transcription.transcript}
-        </p>
+        {transcription?.transcript?.length > 0 && (
+          <p className='m-3 rounded-xl border-2 border-blue-300 bg-blue-200 p-3 text-sm text-gray-900'>
+            {transcription.transcript}
+          </p>
+        )}
         <QuestionList questions={questions} />
       </div>
       <div>
