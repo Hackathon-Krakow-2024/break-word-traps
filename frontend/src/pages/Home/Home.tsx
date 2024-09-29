@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Box, Typography } from '@mui/material'
-import { analyzeText, getTranscriptAndSubtitles, prepareQuestions } from '../../api/ai.mock'
+import { analyzeText, getTranscriptAndSubtitles, prepareQuestions } from '../../api/ai'
 import { TranscriptionAnalysis, TranscriptionResponse } from '../../models/Transcription'
 import { Video } from './Video'
 import VideoUpload from '../../components/VideoUpload'
