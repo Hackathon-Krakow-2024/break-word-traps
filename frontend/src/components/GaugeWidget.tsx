@@ -29,7 +29,7 @@ export const GaugeWidget = ({
         {valueMax && (
           <div className='h-[100px] w-[100px]'>
             <Gauge
-              value={value}
+              value={(value as number) > valueMax ? valueMax : value}
               valueMax={valueMax}
               startAngle={-110}
               endAngle={110}
@@ -42,7 +42,7 @@ export const GaugeWidget = ({
                   fill: colorMap[color as 'green' | 'yellow' | 'red'],
                 },
               }}
-              text={({ value, valueMax }) => `${value} / ${valueMax}`}
+              text={() => ``}
             />
           </div>
         )}
