@@ -111,13 +111,15 @@ export const Home = () => {
   }
 
   return (
-    <div className='grid grid-cols-2 grid-rows-2 bg-zinc-100 p-2'>
-      <div>
-        <VideoUpload handleUploadVideo={onDrop} />
-        <Video videoFile={video} subtitles={transcription.subtitles} />
+    <div className='grid grid-cols-1 grid-rows-2 gap-4 bg-zinc-100 p-4 lg:grid-cols-2'>
+      <div className='flex flex-col items-center'>
+        <div className='max-h-[600px] w-full'>
+          <VideoUpload handleUploadVideo={onDrop} />
+          <Video videoFile={video} subtitles={transcription.subtitles} />
+        </div>
         <VideoActions handleVerifyVideo={handleVerifyVideo} isButtonDisabled={isButtonDisabled} />
       </div>
-      <div>
+      <div className='flex flex-col items-center'>
         <Gauge width={100} height={100} value={60} />
         <Gauge width={100} height={100} value={60} />
         <Gauge width={100} height={100} value={60} />
@@ -125,7 +127,9 @@ export const Home = () => {
       <div>
         <div className='flex flex-col items-center'>
           <h2 className='mb-2 text-lg font-medium'>Wyniki analizy</h2>
-          <p className='text-sm text-gray-900 m-3 p-3 border-2 bg-blue-200 border-blue-300 rounded-xl'>{transcription.transcript}</p>
+          <p className='m-3 rounded-xl border-2 border-blue-300 bg-blue-200 p-3 text-sm text-gray-900'>
+            {transcription.transcript}
+          </p>
           <QuestionList questions={questions} />
         </div>
       </div>
