@@ -45,7 +45,7 @@ const TextAnalysisMetrics: React.FC<Props> = ({ transcriptionAnalysis }) => {
       <div className='mt-4 grid grid-cols-2 gap-4' style={{ minHeight: '200px' }}>
         <GaugeWidget
           color={getFogColor(transcriptionAnalysis.fog_score)}
-          label='Zrozumiałość'
+          label='Zrozumiałość treści'
           value={getInvertedFogScore(transcriptionAnalysis.fog_score)}
           customText={transcriptionAnalysis.fog_message}
           valueMax={18}
