@@ -92,12 +92,10 @@ export const Home = () => {
   }
 
   return (
-    <div className='grid grid-cols-1 grid-rows-2 gap-4 bg-zinc-100 p-4 lg:grid-cols-2'>
-      <div className='flex flex-col items-center'>
-        <div className='flex max-h-[600px] w-full flex-col gap-4'>
-          <VideoUpload handleUploadVideo={onDrop} />
-          <Video videoFile={video} subtitles={transcription.subtitles} />
-        </div>
+    <div className='grid grid-cols-1 grid-rows-2 gap-4 p-4 lg:grid-cols-2' style={{ gridTemplateRows: 'auto 1fr' }}>
+      <div className='flex flex-col items-center' style={{ minHeight: '200px' }}>
+        <VideoUpload handleUploadVideo={onDrop} />
+        <Video videoFile={video} subtitles={transcription.subtitles} />
         <VideoActions handleVerifyVideo={handleVerifyVideo} isButtonDisabled={isButtonDisabled} />
         <p className='text-sm'>Analiza zajmuje około 2 sekund na każdą sekundę wideo.</p>
       </div>
