@@ -47,16 +47,19 @@ export const Video = ({ videoFile, subtitles }: Props) => {
   // }
 
   return (
-    <ReactPlayer
-      ref={playerRef}
-      url={videoUrl}
-      key={subtitlesUrl}
-      controls
-      config={{
-        file: {
-          tracks: [{ kind: 'subtitles', src: subtitlesUrl, srcLang: 'pl', default: true, label: 'video react' }],
-        },
-      }}
-    />
+    <div className='md:max-w-[600px]'>
+      <ReactPlayer
+        ref={playerRef}
+        url={videoUrl}
+        key={subtitlesUrl}
+        controls
+        className='max-w-[600px]'
+        config={{
+          file: {
+            tracks: [{ kind: 'subtitles', src: subtitlesUrl, srcLang: 'pl', default: true, label: 'video react' }],
+          },
+        }}
+      />
+    </div>
   )
 }
