@@ -9,9 +9,9 @@ export const GaugeWidget = ({
   customText,
 }: {
   label: string
-  value: number
-  valueMax: number
-  color: 'green' | 'yellow' | 'red'
+  value?: number
+  valueMax?: number
+  color?: 'green' | 'yellow' | 'red'
   customText?: string
 }) => {
   const colorMap = {
@@ -26,24 +26,26 @@ export const GaugeWidget = ({
           {label}
         </Typography>
 
-        <div className='h-[100px] w-[100px]'>
-          <Gauge
-            value={value}
-            valueMax={valueMax}
-            startAngle={-110}
-            endAngle={110}
-            sx={{
-              [`& .${gaugeClasses.valueText}`]: {
-                fontSize: 15,
-                transform: 'translate(0px, 0px)',
-              },
-              [`& .${gaugeClasses.valueArc}`]: {
-                fill: colorMap[color],
-              },
-            }}
-            text={({ value, valueMax }) => `${value} / ${valueMax}`}
-          />
-        </div>
+        {valueMax && (
+          <div className='h-[100px] w-[100px]'>
+            <Gauge
+              value={value}
+              valueMax={valueMax}
+              startAngle={-110}
+              endAngle={110}
+              sx={{
+                [`& .${gaugeClasses.valueText}`]: {
+                  fontSize: 15,
+                  transform: 'translate(0px, 0px)',
+                },
+                [`& .${gaugeClasses.valueArc}`]: {
+                  fill: colorMap[color as 'green' | 'yellow' | 'red'],
+                },
+              }}
+              text={({ value, valueMax }) => `${value} / ${valueMax}`}
+            />
+          </div>
+        )}
         <Typography variant='body2' className='text-center text-gray-600'>
           {customText && <span className='font-bold'>{customText}</span>}
         </Typography>

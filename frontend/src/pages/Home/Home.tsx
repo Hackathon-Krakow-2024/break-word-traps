@@ -101,7 +101,7 @@ export const Home = () => {
         <VideoActions handleVerifyVideo={handleVerifyVideo} isButtonDisabled={isButtonDisabled} />
         <p className='text-sm'>Analiza zajmuje około 2 sekund na każdą sekundę wideo.</p>
       </div>
-      <div className='flex flex-col items-center gap-8' style={{ minHeight: '200px' }}>
+      <div className='flex items-center gap-8' style={{ minHeight: '200px' }}>
         <GaugeWidget
           color={getFogColor(transcriptionAnalysis.fog_score)}
           label='Zrozumiałość'
@@ -122,6 +122,7 @@ export const Home = () => {
           customText={transcriptionAnalysis.sentiment.emotions.kind}
           valueMax={10}
         />
+        <GaugeWidget label='Docelowy odbiorca' customText={transcriptionAnalysis.targetGroup} />
       </div>
       <div className='flex flex-col items-center'>
         <p className='m-3 rounded-xl border-2 border-blue-300 bg-blue-200 p-3 text-sm text-gray-900'>
