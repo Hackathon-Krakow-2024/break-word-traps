@@ -9,9 +9,9 @@ const QuestionList = ({ questions }: QuestionListProp) => {
   return (
     <Box className='mb-5 rounded-lg border border-solid border-gray-300 bg-white p-6 w-full'>
       <h2 className='mb-2 text-xl font-semibold'>Możliwe pytania:</h2>
-      <ul>
+      <ul className='list-inside list-disc'>
         {questions.map((question, index) => (
-          <li key={index} className='py-1 pt-0 text-gray-900'>
+          <li key={index} className='pb-1 pl-2 text-gray-900'>
             {question}
           </li>
         ))}
