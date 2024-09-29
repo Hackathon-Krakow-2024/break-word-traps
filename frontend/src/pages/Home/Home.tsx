@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { Box, Typography } from '@mui/material'
+import { Alert, Box, Typography } from '@mui/material'
 import { analyzeText, getTranscriptAndSubtitles, prepareQuestions } from '../../api/ai'
 import { TranscriptionAnalysis, TranscriptionResponse } from '../../models/Transcription'
 import { Video } from './Video'
@@ -8,6 +8,7 @@ import VideoActions from '../../components/VideoActions'
 import { ErrorList } from '../../components/ErrorList'
 import QuestionList from '../../components/QuestionList'
 import TextAnalysisMetrics from '../../components/TextAnalysisMetrics'
+import CheckIcon from '@mui/icons-material/Check'
 
 // import LoadingIndicator from '../../components/LoadingIndicator'
 
@@ -41,6 +42,7 @@ export const Home = () => {
 
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [isButtonDisabled, setIsButtonDisabled] = useState<boolean>(true)
+  const [successAlertVisible, setIsSuccessAlertVisible] = useState<boolean>(false)
 
   const onDrop = (acceptedFiles: File[]) => {
     const videoFile = acceptedFiles[0]
@@ -57,6 +59,7 @@ export const Home = () => {
     })
     setTranscriptionAnalysis(emptyState)
     setQuestions([])
+    setIsSuccessAlertVisible(false)
   }, [video])
 
   const handleVerifyVideo = async () => {
@@ -71,6 +74,7 @@ export const Home = () => {
       setTranscriptionAnalysis(analysis)
       const questions = await prepareQuestions(result.transcript)
       setQuestions(questions)
+      setIsSuccessAlertVisible(true)
     } catch (e) {
       console.log(e)
     } finally {
@@ -84,6 +88,7 @@ export const Home = () => {
         <VideoUpload handleUploadVideo={onDrop} />
         <Video videoFile={video} subtitles={transcription.subtitles} />
         <VideoActions handleVerifyVideo={handleVerifyVideo} isButtonDisabled={isButtonDisabled} isLoading={isLoading} />
+        {successAlertVisible && <Alert className="mb-2" icon={<CheckIcon fontSize="inherit" />} severity="success">Analiza zakończona</Alert> }
         <p className='text-xs text-gray-500'>Analiza zajmuje około 2 sekund na każdą sekundę wideo.</p>
       </div>
 
