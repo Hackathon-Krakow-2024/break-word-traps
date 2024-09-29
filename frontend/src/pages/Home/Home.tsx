@@ -94,7 +94,7 @@ export const Home = () => {
 
       <TextAnalysisMetrics transcriptionAnalysis={transcriptionAnalysis} />
 
-      <div className='flex cursor-pointer flex-col items-center'>
+      <div className='flex flex-col items-center'>
         {transcription?.transcript?.length > 0 && (
           <Box className='mb-5 rounded-lg border border-solid border-gray-300 bg-white p-6'>
             <h2 className='mb-2 text-xl font-semibold'>Transkrypcja nagrania:</h2>
@@ -103,7 +103,7 @@ export const Home = () => {
         )}
         <QuestionList questions={questions} />
       </div>
-      <div>
+      <div className="-mt-14">
         <ErrorList transcriptionAnalysis={transcriptionAnalysis} />
       </div>
     </div>

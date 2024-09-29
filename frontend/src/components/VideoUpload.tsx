@@ -37,7 +37,7 @@ const VideoUpload = ({ handleUploadVideo }: VideoUploadProps) => {
     <div className='flex flex-col'>
       <Box
         {...getRootProps()}
-        className={`cursor-pointer rounded-lg border border-solid p-6 ${isDragActive ? 'border-sky-300 bg-blue-50' : 'border-gray-300 bg-white'} `}
+        className={`rounded-lg border border-solid p-6 ${isDragActive ? 'border-sky-300 bg-blue-50' : 'border-gray-300 bg-white'} `}
       >
         <input {...getInputProps()} />
 

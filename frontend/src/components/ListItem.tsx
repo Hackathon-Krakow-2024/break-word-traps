@@ -1,6 +1,6 @@
 import InfoIcon from '@mui/icons-material/Info';
 import ReportProblemIcon from '@mui/icons-material/ReportProblem';
-import { Tooltip, Typography } from '@mui/material';
+import { Tooltip } from '@mui/material';
 
 type Props = {
   type: keyof typeof items
@@ -59,7 +59,7 @@ export const ListItem = ({ type, value }: Props) => {
         }
       >
         {value && <ReportProblemIcon htmlColor='red' fontSize='small' />}
-        <span className={`text-nowrap text-lg  ${value && 'text-red-500'} ${!value && 'text-gray-500 ml-7'}`}>{items[type].text}</span>
+        <span className={`text-nowrap text-md  ${value && 'text-red-500'} ${!value && 'text-gray-500 ml-7'}`}>{items[type].text}</span>
         <Tooltip title={items[type].description} arrow placement='top-end'>
           <InfoIcon
             htmlColor='#a9bdd2'
