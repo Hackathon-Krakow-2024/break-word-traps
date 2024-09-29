@@ -6,7 +6,7 @@ type Props = {
 }
 
 export const ErrorList = ({ transcriptionAnalysis }: Props) => (
-  <div className='flex w-[600px]'>
+  <div className='flex max-w-[600px]'>
     <div className='w-1/2'>
       <ListItem type='tooManyNumbers' value={transcriptionAnalysis.tooManyNumbers} />
       <ListItem type='hateSpeech' value={transcriptionAnalysis.sentiment.hateSpeech} />

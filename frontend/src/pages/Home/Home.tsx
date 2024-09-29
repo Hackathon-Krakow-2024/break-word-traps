@@ -80,7 +80,7 @@ export const Home = () => {
   }
 
   return (
-    <div className='grid grid-cols-1 grid-rows-2 gap-4 bg-zinc-100 p-4 lg:grid-cols-2'>
+    <div className='grid grid-cols-1 grid-rows-2 gap-4 p-4 lg:grid-cols-2'>
       <div className='flex flex-col items-center'>
         <VideoUpload handleUploadVideo={onDrop} />
         <Video videoFile={video} subtitles={transcription.subtitles} />
@@ -94,7 +94,6 @@ export const Home = () => {
       </div>
       <div>
         <div className='flex flex-col items-center'>
-          <h2 className='mb-2 text-lg font-medium'>Wyniki analizy</h2>
           <p className='m-3 rounded-xl border-2 border-blue-300 bg-blue-200 p-3 text-sm text-gray-900'>
             {transcription.transcript}
           </p>
