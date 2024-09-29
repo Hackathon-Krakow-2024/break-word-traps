@@ -85,7 +85,7 @@ export const Home = () => {
         <VideoUpload handleUploadVideo={onDrop} />
         <Video videoFile={video} subtitles={transcription.subtitles} />
         <VideoActions handleVerifyVideo={handleVerifyVideo} isButtonDisabled={isButtonDisabled} />
-        Analiza wideo zajmuje około 2 sekund na każdą sekundę wideo.
+        Analiza zajmuje około 2 sekund na każdą sekundę wideo.
       </div>
       <div className='flex flex-col items-center'>
         <Gauge width={100} height={100} value={60} />
