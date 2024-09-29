@@ -47,7 +47,7 @@ export const Video = ({ videoFile, subtitles }: Props) => {
   // }
 
   return (
-    <div className='md:max-w-[600px]'>
+    <div className='mb-5 mt-5 md:max-w-[600px]'>
       <ReactPlayer
         ref={playerRef}
         url={videoUrl}
