@@ -7,7 +7,7 @@ type Props = {
 
 export const ErrorList = ({ transcriptionAnalysis }: Props) => (
   <div className='flex flex-col items-center justify-center text-left md:mt-9'>
-    <h2 className='mb-4 text-xl font-semibold'>Błędy w wypowiedzi</h2>
+    <h2 className='mb-4 text-xl font-semibold'>Wykryte błędy w wypowiedzi</h2>
     <div className='flex w-full justify-between'>
       <div className='flex w-1/2 flex-col items-center'>
         <ListItem type='tooManyNumbers' value={transcriptionAnalysis.tooManyNumbers} />
